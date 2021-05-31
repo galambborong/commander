@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using AutoMapper;
 using Commander.Data;
 using Commander.Dtos;
+using Commander.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Commander.Controllers
@@ -35,6 +36,16 @@ namespace Commander.Controllers
                 return Ok(_mapper.Map<CommandReadDto>(commandItem));
             }
             return NotFound();
+        }
+
+        [HttpPost]
+        public ActionResult <CommandReadDto> CreateCommand(CommandCreateDto commandCreateDto)
+        {
+            var commandModel = _mapper.Map<Command>(commandCreateDto);
+            _repository.CreateCommand(commandModel);
+            _repository.SaveChanges();
+
+            return Ok(commandModel);
         }
     }
 }
