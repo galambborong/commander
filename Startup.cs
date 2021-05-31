@@ -37,7 +37,7 @@ namespace Commander
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "Commander", Version = "v1"});
             });
 
-            services.AddScoped<ICommanderRepo, MockCommanderRepo>();
+            services.AddScoped<ICommanderRepo, PsqlCommanderRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

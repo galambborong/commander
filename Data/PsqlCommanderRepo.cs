@@ -56,12 +56,11 @@ namespace Commander.Data
 
         public IEnumerable<User> GetAllUsers()
         {
-            throw new NotImplementedException();
+            return _context.Users.ToList();
         }
-
         public User GetUserById(int id)
         {
-            throw new NotImplementedException();
+            return _context.Users.FirstOrDefault(p => p.Id == id);
         }
     }
 }
