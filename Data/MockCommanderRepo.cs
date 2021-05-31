@@ -57,7 +57,7 @@ namespace Commander.Data
             return users;
         }
 
-        public User GetAllUsers(int id)
+        public User GetUserById(int id)
         {
             return new User {Id = 3, Username = "galambborong"};
         }

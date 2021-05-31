@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Commander.Data;
 using Commander.Models;
@@ -10,7 +11,7 @@ namespace Commander.Controllers
     public class UsersController : ControllerBase
     {
         private readonly ICommanderRepo _repository;
-        
+
         public UsersController(ICommanderRepo repository)
         {
             _repository = repository;
@@ -21,6 +22,18 @@ namespace Commander.Controllers
         {
             var userItems = _repository.GetAllUsers();
             return Ok(userItems);
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult<User> GetUserById(int id)
+        {
+            var userItem = _repository.GetUserById(id);
+            if (userItem == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(userItem);
         }
     }
 }

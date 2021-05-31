@@ -59,7 +59,7 @@ namespace Commander.Data
             throw new NotImplementedException();
         }
 
-        public User GetAllUsers(int id)
+        public User GetUserById(int id)
         {
             throw new NotImplementedException();
         }

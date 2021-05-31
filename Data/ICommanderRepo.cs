@@ -14,6 +14,7 @@ namespace Commander.Data
         void DeleteCommand(Command cmd);
 
         IEnumerable<User> GetAllUsers();
-        User GetAllUsers(int id);
+        User GetUserById(int id);
+        
     }
 }
