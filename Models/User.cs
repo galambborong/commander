@@ -1,4 +1,7 @@
+using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Commander.Models
 {
@@ -17,7 +20,8 @@ namespace Commander.Models
         [MaxLength(25)]
         public string Username { get; set; }
         
-        [Timestamp]
-        public byte[] CreatedAt { get; set; }
+        [Required]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTime? CreatedAt { get; set; } = DateTime.Now;
     }
 }
