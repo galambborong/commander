@@ -33,9 +33,7 @@ namespace Commander.Controllers
             if (commandItem != null)
             {
                 return Ok(_mapper.Map<CommandReadDto>(commandItem));
-
             }
-
             return NotFound();
         }
     }
