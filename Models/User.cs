@@ -2,9 +2,11 @@ using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Commander.Models
 {
+    [Index(nameof(Username), IsUnique = true)]
     public class User
     {
         [Key]
@@ -19,9 +21,5 @@ namespace Commander.Models
         [Required]
         [MaxLength(25)]
         public string Username { get; set; }
-        
-        [Required]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime? CreatedAt { get; set; } = DateTime.Now;
     }
 }
