@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using AutoMapper;
 using Commander.Data;
 using Commander.Dtos;
-using Commander.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Commander.Controllers
