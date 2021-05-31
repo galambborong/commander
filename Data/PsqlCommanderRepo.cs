@@ -38,5 +38,10 @@ namespace Commander.Data
 
             _context.Commands.Add(cmd);
         }
+
+        public void UpdateCommand(Command cmd)
+        {
+            // Do nothing... this is counter intuitive...
+        }
     }
 }
