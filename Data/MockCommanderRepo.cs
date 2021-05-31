@@ -42,5 +42,24 @@ namespace Commander.Data
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerable<User> GetAllUsers()
+        {
+            DateTime now = DateTime.Now;
+            DateTime dt = new DateTime(2019, 2, 22, 14, 0, 0);
+            var users = new List<User>
+            {
+                            new User {Id = 1, FirstName = "James", LastName = "Bond", Username = "007"},
+                            new User {Id = 2, FirstName = "Jack", LastName = "Reacher", Username = "Reach123"},
+                            new User {Id = 3, Username = "galambborong"},
+            };
+
+            return users;
+        }
+
+        public User GetAllUsers(int id)
+        {
+            return new User {Id = 3, Username = "galambborong"};
+        }
     }
 }

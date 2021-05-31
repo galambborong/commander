@@ -53,5 +53,15 @@ namespace Commander.Data
 
             _context.Commands.Remove(cmd);
         }
+
+        public IEnumerable<User> GetAllUsers()
+        {
+            throw new NotImplementedException();
+        }
+
+        public User GetAllUsers(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
