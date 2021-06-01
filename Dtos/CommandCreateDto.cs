@@ -14,10 +14,11 @@ namespace Commander.Dtos
         public string Line { get; set; }
         
         [Required]
-        [ForeignKey("Id")]
-        public int Platform { get; set; }
-        
-        [Required]
         public bool AdminPrivilegesRequired { get; set; }
+        
+        public int PlatformId { get; set; }
+        
+        [ForeignKey("PlatformId")] 
+        public Platform Platform { get; set; }
     }
 }
