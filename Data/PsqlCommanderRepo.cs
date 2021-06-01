@@ -35,6 +35,8 @@ namespace Commander.Data
             {
                 throw new ArgumentNullException(nameof(cmd));
             }
+            
+            Console.WriteLine(cmd);
 
             _context.Commands.Add(cmd);
         }
