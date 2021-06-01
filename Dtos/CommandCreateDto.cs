@@ -1,4 +1,6 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Commander.Models;
 
 namespace Commander.Dtos
 {
@@ -12,7 +14,8 @@ namespace Commander.Dtos
         public string Line { get; set; }
         
         [Required]
-        public string Platform { get; set; }
+        [ForeignKey("Id")]
+        public int Platform { get; set; }
         
         [Required]
         public bool AdminPrivilegesRequired { get; set; }

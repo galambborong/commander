@@ -14,12 +14,13 @@ namespace Commander.Models
         
         [Required]
         public string Line { get; set; }
-        
-        [Required]
-        [ForeignKey("Id")]
-        public Platform Platform { get; set; }
 
         [Required]
         public bool AdminPrivilegesRequired { get; set; }
+
+        public int PlatformId { get; set; }
+        
+        [ForeignKey("PlatformId")] 
+        public Platform Platform { get; set; }
     }
 }
