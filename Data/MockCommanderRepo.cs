@@ -61,5 +61,17 @@ namespace Commander.Data
         {
             return new User {Id = 3, Username = "galambborong"};
         }
+
+        public IEnumerable<Platform> GetAllPlatforms()
+        {
+            var platforms = new List<Platform>
+            {
+                            new Platform {Id = 1, Name = "Linux"},
+                            new Platform {Id = 2, Name = "Dotnet"},
+                            new Platform {Id = 3, Name = "Pacman"}
+            };
+
+            return platforms;
+        }
     }
 }

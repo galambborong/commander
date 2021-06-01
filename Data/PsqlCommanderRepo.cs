@@ -64,5 +64,10 @@ namespace Commander.Data
         {
             return _context.Users.FirstOrDefault(p => p.Id == id);
         }
+
+        public IEnumerable<Platform> GetAllPlatforms()
+        {
+            return _context.Platforms.ToList();
+        }
     }
 }

@@ -15,6 +15,8 @@ namespace Commander.Data
 
         IEnumerable<User> GetAllUsers();
         User GetUserById(int id);
+
+        IEnumerable<Platform> GetAllPlatforms();
         
     }
 }
