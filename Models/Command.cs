@@ -18,6 +18,7 @@ namespace Commander.Models
         [Required]
         public bool AdminPrivilegesRequired { get; set; }
 
+        [Required]
         public int PlatformId { get; set; }
         
         [ForeignKey("PlatformId")] 

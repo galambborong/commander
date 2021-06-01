@@ -15,7 +15,5 @@ namespace Commander.Dtos
 
         public int PlatformId { get; set; }
         
-        // [ForeignKey("PlatformId")] 
-        // public Platform Platform { get; set; }
     }
 }
