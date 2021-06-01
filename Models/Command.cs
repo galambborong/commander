@@ -16,5 +16,8 @@ namespace Commander.Models
         
         [Required]
         public string Platform { get; set; }
+
+        [Required]
+        public bool AdminPrivilegesRequired { get; set; }
     }
 }
