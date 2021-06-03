@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Commander.Dtos;
 using Commander.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
@@ -23,14 +24,34 @@ namespace Commander.Data
 
         public IEnumerable<Command> GetAllCommands()
         {
-            // return _context.Commands
-            //                 .Include(command => command.Id)
-            //                 .Include(command => command.HowTo)
-            //                 .Include(command => command.Line)
-            //                 .Include(command => command.AdminPrivilegesRequired)
-            //                 .AsEnumerable();
+            var result = (_context.Commands.Join(_context.Platforms,
+                            command => command.PlatformId,
+                            platform => platform.Id,
+                            (command, platform) => new
+                            {
+                                            Id = command.Id,
+                                            HowTo = command.HowTo,
+                                            Line = command.Line,
+                                            Name = platform.Name,
+                                            AdminPrivilegesRequired = command.AdminPrivilegesRequired
+                            })).ToList();
 
+            foreach (var query in result)
+            {
+                Console.WriteLine(
+                                "{0}, {1}, {2}, {3}, {4}", query.Id, query.HowTo, query.Line, query.Name, query.AdminPrivilegesRequired
+                );
+            }
+
+
+
+            
+            // Cannot convert expression type 'System.Collections.Generic.List<{int Id, string HowTo, string Line, string Name, bool AdminPrivilegesRequired}>'
+            // to return type 'System.Collections.Generic.IEnumerable<Commander.Models.Command>'
+            
+            
             return _context.Commands.ToList();
+            // return result;
         }
 
         public Command GetCommandById(int id)

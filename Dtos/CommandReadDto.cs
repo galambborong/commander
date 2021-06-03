@@ -11,7 +11,7 @@ namespace Commander.Dtos
         
         public string Line { get; set; }
 
-        // public string Name { get; set; }
+        public string Name { get; set; }
         
         public bool AdminPrivilegesRequired { get; set; }
 
