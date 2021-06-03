@@ -24,7 +24,7 @@ namespace Commander.Data
 
         public IEnumerable<ReturnCommand> GetAllCommands()
         {
-            var result = (_context.Commands.Join(_context.Platforms,
+            return (_context.Commands.Join(_context.Platforms,
                             command => command.PlatformId,
                             platform => platform.Id,
                             (command, platform) => new ReturnCommand 
@@ -35,16 +35,7 @@ namespace Commander.Data
                                             Platform = platform.Name,
                                             AdminPrivilegesRequired = command.AdminPrivilegesRequired
                             })).AsEnumerable();
-
-            foreach (var query in result)
-            {
-                Console.WriteLine(
-                                "{0}, {1}, {2}, {3}, {4}", query.Id, query.HowTo, query.Line, query.Platform, query.AdminPrivilegesRequired
-                );
-            }
-
-            return result;
-            // return result;
+            
         }
 
         public Command GetCommandById(int id)
