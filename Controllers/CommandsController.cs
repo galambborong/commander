@@ -22,11 +22,10 @@ namespace Commander.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<CommandReadDto>> GetAllCommands()
+        public ActionResult<IEnumerable<ReturnCommand>> GetAllCommands()
         {
             var commandItems = _repository.GetAllCommands();
-            return Ok(_mapper.Map<IEnumerable<CommandReadDto>>(commandItems));
-            // return Ok(commandItems);
+            return Ok(_mapper.Map<IEnumerable<ReturnCommand>>(commandItems));
         }
 
         [HttpGet("{id}", Name="GetCommandById")]

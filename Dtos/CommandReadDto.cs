@@ -11,11 +11,9 @@ namespace Commander.Dtos
         
         public string Line { get; set; }
 
-        public string Name { get; set; }
+        public string Platform { get; set; }
         
         public bool AdminPrivilegesRequired { get; set; }
 
-        // public int PlatformId { get; set; }
-        
     }
 }

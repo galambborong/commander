@@ -22,12 +22,12 @@ namespace Commander.Data
             return (_context.SaveChanges() >= 0);
         }
 
-        public IEnumerable<Command> GetAllCommands()
+        public IEnumerable<ReturnCommand> GetAllCommands()
         {
             var result = (_context.Commands.Join(_context.Platforms,
                             command => command.PlatformId,
                             platform => platform.Id,
-                            (command, platform) => new
+                            (command, platform) => new ReturnCommand 
                             {
                                             Id = command.Id,
                                             HowTo = command.HowTo,
@@ -42,9 +42,9 @@ namespace Commander.Data
                                 "{0}, {1}, {2}, {3}, {4}", query.Id, query.HowTo, query.Line, query.Platform, query.AdminPrivilegesRequired
                 );
             }
-            
-            // return _context.Commands.ToList();
+
             return result;
+            // return result;
         }
 
         public Command GetCommandById(int id)
