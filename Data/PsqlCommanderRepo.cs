@@ -32,14 +32,14 @@ namespace Commander.Data
                                             Id = command.Id,
                                             HowTo = command.HowTo,
                                             Line = command.Line,
-                                            Name = platform.Name,
+                                            Platform = platform.Name,
                                             AdminPrivilegesRequired = command.AdminPrivilegesRequired
                             })).AsEnumerable();
 
             foreach (var query in result)
             {
                 Console.WriteLine(
-                                "{0}, {1}, {2}, {3}, {4}", query.Id, query.HowTo, query.Line, query.Name, query.AdminPrivilegesRequired
+                                "{0}, {1}, {2}, {3}, {4}", query.Id, query.HowTo, query.Line, query.Platform, query.AdminPrivilegesRequired
                 );
             }
             
