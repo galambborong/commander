@@ -34,7 +34,7 @@ namespace Commander.Data
                                             Line = command.Line,
                                             Name = platform.Name,
                                             AdminPrivilegesRequired = command.AdminPrivilegesRequired
-                            })).ToList();
+                            })).AsEnumerable();
 
             foreach (var query in result)
             {
@@ -42,16 +42,9 @@ namespace Commander.Data
                                 "{0}, {1}, {2}, {3}, {4}", query.Id, query.HowTo, query.Line, query.Name, query.AdminPrivilegesRequired
                 );
             }
-
-
-
             
-            // Cannot convert expression type 'System.Collections.Generic.List<{int Id, string HowTo, string Line, string Name, bool AdminPrivilegesRequired}>'
-            // to return type 'System.Collections.Generic.IEnumerable<Commander.Models.Command>'
-            
-            
-            return _context.Commands.ToList();
-            // return result;
+            // return _context.Commands.ToList();
+            return result;
         }
 
         public Command GetCommandById(int id)
