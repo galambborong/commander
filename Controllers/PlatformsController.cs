@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using Commander.Data;
 using Commander.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -20,6 +22,7 @@ namespace Commander.Controllers
         public ActionResult<IEnumerable<Platform>> GetAllPlatforms()
         {
             var platformItems = _repository.GetAllPlatforms();
+            
             return Ok(platformItems);
         }
 

@@ -26,6 +26,7 @@ namespace Commander.Controllers
         {
             var commandItems = _repository.GetAllCommands();
             return Ok(_mapper.Map<IEnumerable<CommandReadDto>>(commandItems));
+            // return Ok(commandItems);
         }
 
         [HttpGet("{id}", Name="GetCommandById")]

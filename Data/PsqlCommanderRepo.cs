@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Commander.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace Commander.Data
 {
@@ -21,6 +23,13 @@ namespace Commander.Data
 
         public IEnumerable<Command> GetAllCommands()
         {
+            // return _context.Commands
+            //                 .Include(command => command.Id)
+            //                 .Include(command => command.HowTo)
+            //                 .Include(command => command.Line)
+            //                 .Include(command => command.AdminPrivilegesRequired)
+            //                 .AsEnumerable();
+
             return _context.Commands.ToList();
         }
 
