@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using AutoMapper.QueryableExtensions;
 
 namespace Commander.Models
 {
@@ -23,5 +24,15 @@ namespace Commander.Models
         
         [ForeignKey("PlatformId")] 
         public Platform Platform { get; set; }
+    }
+
+    [NotMapped]
+    public class ReturnCommand
+    {
+        public int Id { get; set; }
+        public string HowTo { get; set; }
+        public string Line { get; set; }
+        public string Platform { get; set; }
+        public bool AdminPrivilegesRequired { get; set; }
     }
 }
