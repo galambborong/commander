@@ -33,13 +33,10 @@ namespace Commander.Controllers
         public ActionResult<PublicCommand> GetCommandById(int id)
         {
             var commandItem = _repository.GetCommandById(id);
-            // if (commandItem != null) return Ok(_mapper.Map<PublicCommand>(commandItem.Cast<PublicCommand>()));
-            if (commandItem != null) return Ok(commandItem.Cast<PublicCommand>());
-            return NotFound();
-            
+
+            return commandItem != null ? Ok(commandItem.Cast<PublicCommand>()) : NotFound();
         }
 
-        // return Ok(_mapper.Map<CommandReadDto>(commandItem));
         
         [HttpPost]
         public ActionResult<CommandReadDto> CreateCommand(CommandCreateDto commandCreateDto)
