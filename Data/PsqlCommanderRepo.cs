@@ -22,12 +22,12 @@ namespace Commander.Data
             return (_context.SaveChanges() >= 0);
         }
 
-        public IEnumerable<ReturnCommand> GetAllCommands()
+        public IEnumerable<PublicCommand> GetAllCommands()
         {
             return (_context.Commands.Join(_context.Platforms,
                             command => command.PlatformId,
                             platform => platform.Id,
-                            (command, platform) => new ReturnCommand 
+                            (command, platform) => new PublicCommand 
                             {
                                             Id = command.Id,
                                             HowTo = command.HowTo,
@@ -38,10 +38,22 @@ namespace Commander.Data
             
         }
 
-        public Command GetCommandById(int id)
+        public IQueryable<PublicCommand> GetCommandById(int id)
         {
-            return _context.Commands.FirstOrDefault(p => p.Id == id);
+            return (_context.Commands.Join(_context.Platforms,
+                            command => command.PlatformId,
+                            platform => platform.Id,
+                            (command, platform) => new PublicCommand
+                            {
+                                            Id = command.Id,
+                                            HowTo = command.HowTo,
+                                            Line = command.Line,
+                                            Platform = platform.Name,
+                                            AdminPrivilegesRequired = command.AdminPrivilegesRequired
+                            }).Where(p => p.Id == id));
         }
+        
+        // return _context.Commands.FirstOrDefault(p => p.Id == id);
 
         public void CreateCommand(Command cmd)
         {

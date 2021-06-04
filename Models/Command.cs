@@ -27,7 +27,7 @@ namespace Commander.Models
     }
 
     [NotMapped]
-    public class ReturnCommand
+    public class PublicCommand
     {
         public int Id { get; set; }
         public string HowTo { get; set; }

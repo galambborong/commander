@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using Commander.Data;
 using Commander.Dtos;
@@ -22,92 +24,34 @@ namespace Commander.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<ReturnCommand>> GetAllCommands()
+        public ActionResult<IEnumerable<PublicCommand>> GetAllCommands()
         {
             var commandItems = _repository.GetAllCommands();
-            return Ok(_mapper.Map<IEnumerable<ReturnCommand>>(commandItems));
+            return Ok(_mapper.Map<IEnumerable<PublicCommand>>(commandItems));
         }
 
         [HttpGet("{id}", Name="GetCommandById")]
-        public ActionResult<CommandReadDto> GetCommandById(int id)
+        public ActionResult<PublicCommand> GetCommandById(int id)
         {
             var commandItem = _repository.GetCommandById(id);
-            if (commandItem != null)
-            {
-                return Ok(_mapper.Map<CommandReadDto>(commandItem));
-            }
-            return NotFound();
-        }
-
-        [HttpPost]
-        public ActionResult<CommandReadDto> CreateCommand(CommandCreateDto commandCreateDto)
-        {
-            var commandModel = _mapper.Map<Command>(commandCreateDto);
-            _repository.CreateCommand(commandModel);
-            _repository.SaveChanges();
-
-            var commandReadDto = _mapper.Map<CommandReadDto>(commandModel);
-            
-            return CreatedAtRoute(nameof(GetCommandById), new {Id = commandReadDto.Id}, commandReadDto);
-        }
-
-        [HttpPut("{id}")]
-        public ActionResult UpdateCommand(int id, CommandUpdateDto commandUpdateDto)
-        {
-            var commandModelFromRepo = _repository.GetCommandById(id);
-            if (commandModelFromRepo == null)
+            if (commandItem == null)
             {
                 return NotFound();
             }
-
-            _mapper.Map(commandUpdateDto, commandModelFromRepo);
-            
-            _repository.UpdateCommand(commandModelFromRepo);
-
-            _repository.SaveChanges();
-
-            return NoContent();
+            Console.WriteLine("{0}", commandItem);
+            return Ok(commandItem);
         }
 
-        [HttpPatch("{id}")]
-        public ActionResult PartialCommandUpdate(int id, JsonPatchDocument<CommandUpdateDto> patchDocument)
-        {
-            var commandModelFromRepo = _repository.GetCommandById(id);
-            if (commandModelFromRepo == null)
-            {
-                return NotFound();
-            }
-
-            var commandToPatch = _mapper.Map<CommandUpdateDto>(commandModelFromRepo);
-            
-            patchDocument.ApplyTo(commandToPatch, ModelState);
-
-            if (!TryValidateModel(commandToPatch))
-            {
-                return ValidationProblem(ModelState);
-            }
-
-            _mapper.Map(commandToPatch, commandModelFromRepo);
-            
-            _repository.UpdateCommand(commandModelFromRepo);
-
-            _repository.SaveChanges();
-
-            return NoContent();
-        }
-
-        [HttpDelete("{id}")]
-        public ActionResult DeleteCommand(int id)
-        {
-            var commandModelFromRepo = _repository.GetCommandById(id);
-            if (commandModelFromRepo == null)
-            {
-                return NotFound();
-            }
-            _repository.DeleteCommand(commandModelFromRepo);
-            _repository.SaveChanges();
-
-            return NoContent();
-        }
+        // [HttpPost]
+        // public ActionResult<CommandReadDto> CreateCommand(CommandCreateDto commandCreateDto)
+        // {
+        //     var commandModel = _mapper.Map<Command>(commandCreateDto);
+        //     _repository.CreateCommand(commandModel);
+        //     _repository.SaveChanges();
+        //
+        //     var commandReadDto = _mapper.Map<CommandReadDto>(commandModel);
+        //     
+        //     return CreatedAtRoute(nameof(GetCommandById), new {Id = commandReadDto.Id}, commandReadDto);
+        // }
     }
 }
