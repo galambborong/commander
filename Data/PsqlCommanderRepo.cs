@@ -52,8 +52,6 @@ namespace Commander.Data
                                             AdminPrivilegesRequired = command.AdminPrivilegesRequired
                             }).Where(p => p.Id == id));
         }
-        
-        // return _context.Commands.FirstOrDefault(p => p.Id == id);
 
         public void CreateCommand(Command cmd)
         {
