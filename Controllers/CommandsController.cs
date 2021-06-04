@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
@@ -34,7 +33,7 @@ namespace Commander.Controllers
         {
             var commandItem = _repository.GetCommandById(id);
 
-            return commandItem != null ? Ok(commandItem.Cast<PublicCommand>()) : NotFound();
+            return commandItem != null ? Ok(commandItem) : NotFound();
         }
 
         

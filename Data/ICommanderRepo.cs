@@ -10,7 +10,7 @@ namespace Commander.Data
     {
         bool SaveChanges();
         IEnumerable<PublicCommand> GetAllCommands();
-        IQueryable<PublicCommand> GetCommandById(int id);
+        PublicCommand GetCommandById(int id);
         
         void CreateCommand(Command cmd);
         void UpdateCommand(Command cmd);

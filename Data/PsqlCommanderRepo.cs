@@ -38,9 +38,9 @@ namespace Commander.Data
             
         }
 
-        public IQueryable<PublicCommand> GetCommandById(int id)
+        public PublicCommand GetCommandById(int id)
         {
-            return (_context.Commands.Join(_context.Platforms,
+            return _context.Commands.Join(_context.Platforms,
                             command => command.PlatformId,
                             platform => platform.Id,
                             (command, platform) => new PublicCommand
@@ -50,7 +50,7 @@ namespace Commander.Data
                                             Line = command.Line,
                                             Platform = platform.Name,
                                             AdminPrivilegesRequired = command.AdminPrivilegesRequired
-                            }).Where(p => p.Id == id));
+                            }).Where(p => p.Id == id).FirstOrDefault(p => p.Id == id);
         }
 
         public void CreateCommand(Command cmd)

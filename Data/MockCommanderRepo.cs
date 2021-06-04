@@ -25,7 +25,7 @@ namespace Commander.Data
             return commands;
         }
 
-        public IQueryable<PublicCommand> GetCommandById(int id)
+        public PublicCommand GetCommandById(int id)
         {
             throw new NotImplementedException();
             // return new PublicCommand {Id = 0, HowTo = "Boil an egg", Line = "Boil water", Platform = "Woo"};
