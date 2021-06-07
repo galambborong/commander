@@ -76,5 +76,10 @@ namespace Commander.Data
 
             return platforms;
         }
+
+        public Platform GetPlatformById(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

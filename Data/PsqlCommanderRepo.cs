@@ -93,5 +93,10 @@ namespace Commander.Data
         {
             return _context.Platforms.ToList();
         }
+
+        public Platform GetPlatformById(int id)
+        {
+            return _context.Platforms.FirstOrDefault(p => p.Id == id);
+        }
     }
 }

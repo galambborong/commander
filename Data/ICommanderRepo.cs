@@ -20,6 +20,7 @@ namespace Commander.Data
         User GetUserById(int id);
 
         IEnumerable<Platform> GetAllPlatforms();
-        
+
+        Platform GetPlatformById(int id);
     }
 }
