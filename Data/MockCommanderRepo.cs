@@ -81,5 +81,10 @@ namespace Commander.Data
         {
             throw new NotImplementedException();
         }
+
+        public void CreatePlatform(Platform platform)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

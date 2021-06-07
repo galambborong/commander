@@ -1,11 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml;
-using Commander.Dtos;
 using Commander.Models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query;
+
 
 namespace Commander.Data
 {
@@ -100,6 +97,16 @@ namespace Commander.Data
         public Platform GetPlatformById(int id)
         {
             return _context.Platforms.FirstOrDefault(p => p.Id == id);
+        }
+
+        public void CreatePlatform(Platform newPlatform)
+        {
+            if (newPlatform == null)
+            {
+                throw new ArgumentNullException(nameof(newPlatform));
+            }
+
+            _context.Platforms.Add(newPlatform);
         }
     }
 }

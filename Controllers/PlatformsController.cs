@@ -28,11 +28,20 @@ namespace Commander.Controllers
             return Ok(platformItems);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name="GetPlatformById")]
         public ActionResult<Platform> GetPlatformById(int id)
         {
             var platformItem = _repository.GetPlatformById(id);
             return platformItem != null ? Ok(platformItem) : NotFound();
+        }
+
+        [HttpPost]
+        public ActionResult<Platform> CreatePlatform(Platform newPlatform)
+        {
+            _repository.CreatePlatform(newPlatform);
+            _repository.SaveChanges();
+
+            return CreatedAtRoute(nameof(GetPlatformById), new {Id = newPlatform.Id}, newPlatform);
         }
 
     }
