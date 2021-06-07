@@ -61,9 +61,9 @@ namespace Commander.Data
                 throw new ArgumentNullException(nameof(cmd));
             }
             
-            var platform = _context.Platforms.FirstOrDefault(p => p.Id == cmd.PlatformId);
-
-            if (platform == null) throw new Exception("PlatformId not found");
+            // var platform = _context.Platforms.FirstOrDefault(p => p.Id == cmd.PlatformId);
+            //
+            // if (platform == null) throw new Exception("PlatformId not found");
             
             _context.Commands.Add(cmd);
         }

@@ -46,7 +46,18 @@ namespace Commander.Controllers
 
             var newCommand = _mapper.Map<PublicCommand>(commandModel);
 
-            var platformName = _repository.GetPlatformById(commandModel.PlatformId);
+            var platformName = new Platform();
+            
+            try
+            {
+                platformName = _repository.GetPlatformById(commandModel.PlatformId);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return Problem();
+            }
+          
 
             newCommand.Platform = platformName.Name;
 
