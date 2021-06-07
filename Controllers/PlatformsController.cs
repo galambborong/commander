@@ -13,7 +13,7 @@ namespace Commander.Controllers
     public class PlatformsController : ControllerBase
     {
         private readonly ICommanderRepo _repository;
-        private readonly IMapper _mapper;
+        // private readonly IMapper _mapper;
 
         public PlatformsController(ICommanderRepo repository)
         {

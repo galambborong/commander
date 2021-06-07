@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml;
 using Commander.Dtos;
 using Commander.Models;
 using Microsoft.EntityFrameworkCore;
@@ -60,8 +61,10 @@ namespace Commander.Data
                 throw new ArgumentNullException(nameof(cmd));
             }
             
-            Console.WriteLine(cmd.Line);
+            var platform = _context.Platforms.FirstOrDefault(p => p.Id == cmd.PlatformId);
 
+            if (platform == null) throw new Exception("PlatformId not found");
+            
             _context.Commands.Add(cmd);
         }
 

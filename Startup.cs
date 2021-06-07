@@ -50,6 +50,10 @@ namespace Commander
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Commander v1"));
             }
 
+            app.UseExceptionHandler("/error");
+            app.UseStatusCodePages(
+                            "application/json; charset=utf-8", "Status code: {0}");
+
             app.UseHttpsRedirection();
 
             app.UseRouting();

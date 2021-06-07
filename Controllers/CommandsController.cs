@@ -46,7 +46,13 @@ namespace Commander.Controllers
 
             var newCommand = _mapper.Map<PublicCommand>(commandModel);
 
-            return CreatedAtRoute(nameof(GetCommandById), new {Id = newCommand.Id}, newCommand);
+            var platformName = _repository.GetPlatformById(commandModel.PlatformId);
+
+            newCommand.Platform = platformName.Name;
+
+            return platformName.Name.Length > 0
+                            ? CreatedAtRoute(nameof(GetCommandById), new {Id = newCommand.Id}, newCommand)
+                            : Problem(statusCode: 405);
         }
     }
 }
