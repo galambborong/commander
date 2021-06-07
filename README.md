@@ -23,10 +23,12 @@ Currently, the API supports the following methods/endpoints:
 
 ```http
 GET /api/commands
-
+POST /api/commands
 GET /api/commands/{id}
 
 GET /api/platforms
+GET /api/platforms/{id}
+POST /api/platforms
 ```
 Formerly, full CRUD operations were available for `/api/commands`, but as I've developed this beyond the tutorial I am redesigning the API to meet my own needs. 
 A full range of CRUD operations will be supported in due course. 
