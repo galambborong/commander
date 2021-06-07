@@ -80,15 +80,6 @@ namespace Commander.Data
             _context.Commands.Remove(cmd);
         }
 
-        public IEnumerable<User> GetAllUsers()
-        {
-            return _context.Users.ToList();
-        }
-        public User GetUserById(int id)
-        {
-            return _context.Users.FirstOrDefault(p => p.Id == id);
-        }
-
         public IEnumerable<Platform> GetAllPlatforms()
         {
             return _context.Platforms.ToList();

@@ -16,11 +16,7 @@ namespace Commander.Data
         void UpdateCommand(Command cmd);
         void DeleteCommand(Command cmd);
 
-        IEnumerable<User> GetAllUsers();
-        User GetUserById(int id);
-
         IEnumerable<Platform> GetAllPlatforms();
-
         Platform GetPlatformById(int id);
         void CreatePlatform(Platform platform);
     }
