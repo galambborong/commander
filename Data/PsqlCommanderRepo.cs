@@ -60,7 +60,7 @@ namespace Commander.Data
                 throw new ArgumentNullException(nameof(cmd));
             }
             
-            Console.WriteLine(cmd);
+            Console.WriteLine(cmd.Line);
 
             _context.Commands.Add(cmd);
         }
