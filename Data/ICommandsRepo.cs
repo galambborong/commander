@@ -5,7 +5,7 @@ using Commander.Models;
 namespace Commander.Data
 
 {
-    public interface ICommandRepo
+    public interface ICommandsRepo
     {
         bool SaveChanges();
         IEnumerable<CommandReadDto> GetAllCommands();

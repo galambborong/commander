@@ -7,11 +7,11 @@ using Commander.Models;
 
 namespace Commander.Data
 {
-    public class PsqlCommanderRepo : ICommanderRepo
+    public class PsqlCommandsRepo : ICommandsRepo
     {
         private readonly CommanderContext _context;
 
-        public PsqlCommanderRepo(CommanderContext context)
+        public PsqlCommandsRepo(CommanderContext context)
         {
             _context = context;
         }
@@ -77,24 +77,6 @@ namespace Commander.Data
             _context.Commands.Remove(cmd);
         }
 
-        public IEnumerable<Platform> GetAllPlatforms()
-        {
-            return _context.Platforms.ToList();
-        }
-
-        public Platform GetPlatformById(int id)
-        {
-            return _context.Platforms.FirstOrDefault(p => p.Id == id);
-        }
-
-        public void CreatePlatform(Platform newPlatform)
-        {
-            if (newPlatform == null)
-            {
-                throw new ArgumentNullException(nameof(newPlatform));
-            }
-
-            _context.Platforms.Add(newPlatform);
-        }
+       
     }
 }

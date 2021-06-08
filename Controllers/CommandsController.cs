@@ -13,26 +13,28 @@ namespace Commander.Controllers
     [ApiController]
     public class CommandsController : ControllerBase
     {
-        private readonly ICommanderRepo _repository;
+        private readonly ICommandsRepo _commandsRepo;
+        private readonly IPlatformsRepo _platformsRepo;
         private readonly IMapper _mapper;
 
-        public CommandsController(ICommanderRepo repository, IMapper mapper)
+        public CommandsController(ICommandsRepo commandsRepo, IMapper mapper, IPlatformsRepo platformsRepo)
         {
-            _repository = repository;
+            _commandsRepo = commandsRepo;
             _mapper = mapper;
+            _platformsRepo = platformsRepo;
         }
 
         [HttpGet]
         public ActionResult<IEnumerable<CommandReadDto>> GetAllCommands()
         {
-            var commandItems = _repository.GetAllCommands();
+            var commandItems = _commandsRepo.GetAllCommands();
             return Ok(commandItems);
         }
 
         [HttpGet("{id}", Name="GetCommandById")]
         public ActionResult<CommandReadDto> GetCommandById(int id)
         {
-            var commandItem = _repository.GetCommandById(id);
+            var commandItem = _commandsRepo.GetCommandById(id);
 
             return commandItem != null ? Ok(commandItem) : NotFound();
         }
@@ -41,8 +43,8 @@ namespace Commander.Controllers
         public ActionResult<CommandReadDto> CreateCommand(CommandCreateDto commandCreateDto)
         {
             var commandModel = _mapper.Map<Command>(commandCreateDto);
-            _repository.CreateCommand(commandModel);
-            _repository.SaveChanges();
+            _commandsRepo.CreateCommand(commandModel);
+            _commandsRepo.SaveChanges();
 
             var newCommand = _mapper.Map<CommandReadDto>(commandModel);
 
@@ -50,7 +52,7 @@ namespace Commander.Controllers
             
             try
             {
-                platformName = _repository.GetPlatformById(commandModel.PlatformId);
+                platformName = _platformsRepo.GetPlatformById(commandModel.PlatformId);
             }
             catch (Exception e)
             {

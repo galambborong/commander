@@ -12,10 +12,10 @@ namespace Commander.Controllers
     [ApiController]
     public class PlatformsController : ControllerBase
     {
-        private readonly ICommanderRepo _repository;
+        private readonly IPlatformsRepo _repository;
         // private readonly IMapper _mapper;
 
-        public PlatformsController(ICommanderRepo repository)
+        public PlatformsController(IPlatformsRepo repository)
         {
             _repository = repository;
         }
