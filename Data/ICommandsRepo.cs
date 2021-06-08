@@ -5,7 +5,7 @@ using Commander.Models;
 namespace Commander.Data
 
 {
-    public interface ICommanderRepo
+    public interface ICommandRepo
     {
         bool SaveChanges();
         IEnumerable<CommandReadDto> GetAllCommands();
@@ -15,8 +15,6 @@ namespace Commander.Data
         void UpdateCommand(Command cmd);
         void DeleteCommand(Command cmd);
 
-        IEnumerable<Platform> GetAllPlatforms();
-        Platform GetPlatformById(int id);
-        void CreatePlatform(Platform platform);
+
     }
 }
