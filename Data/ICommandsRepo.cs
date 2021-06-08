@@ -10,6 +10,7 @@ namespace Commander.Data
         bool SaveChanges();
         IEnumerable<CommandReadDto> GetAllCommands();
         CommandReadDto GetCommandById(int id);
+        Command GetDbCommandById(int id);
         
         void CreateCommand(Command cmd);
         void UpdateCommand(Command cmd);

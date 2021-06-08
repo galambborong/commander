@@ -67,5 +67,18 @@ namespace Commander.Controllers
                             ? CreatedAtRoute(nameof(GetCommandById), new {Id = newCommand.Id}, newCommand)
                             : Problem(statusCode: 405);
         }
+
+        [HttpDelete("{id}")]
+        public ActionResult DeleteCommand(int id)
+        {
+            var commandModelFromRepo = _commandsRepo.GetDbCommandById(id);
+            
+            if (commandModelFromRepo == null) return NotFound();
+
+            _commandsRepo.DeleteCommand(commandModelFromRepo);
+            _commandsRepo.SaveChanges();
+
+            return NoContent();
+        }
     }
 }

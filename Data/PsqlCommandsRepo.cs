@@ -52,6 +52,11 @@ namespace Commander.Data
                             }).Where(p => p.Id == id).FirstOrDefault(p => p.Id == id);
         }
 
+        public Command GetDbCommandById(int id)
+        {
+            return _context.Commands.FirstOrDefault((p => p.Id == id));
+        }
+
         public void CreateCommand(Command cmd)
         {
             if (cmd == null)
@@ -76,7 +81,5 @@ namespace Commander.Data
 
             _context.Commands.Remove(cmd);
         }
-
-       
     }
 }

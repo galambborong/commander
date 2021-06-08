@@ -31,6 +31,11 @@ namespace Commander.Data
             // return new PublicCommand {Id = 0, HowTo = "Boil an egg", Line = "Boil water", Platform = "Woo"};
         }
 
+        public Command GetDbCommandById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public void CreateCommand(Command cmd)
         {
             throw new NotImplementedException();
