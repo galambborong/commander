@@ -23,14 +23,14 @@ namespace Commander.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<PublicCommand>> GetAllCommands()
+        public ActionResult<IEnumerable<CommandReadDto>> GetAllCommands()
         {
             var commandItems = _repository.GetAllCommands();
             return Ok(commandItems);
         }
 
         [HttpGet("{id}", Name="GetCommandById")]
-        public ActionResult<PublicCommand> GetCommandById(int id)
+        public ActionResult<CommandReadDto> GetCommandById(int id)
         {
             var commandItem = _repository.GetCommandById(id);
 
@@ -38,13 +38,13 @@ namespace Commander.Controllers
         }
 
         [HttpPost]
-        public ActionResult<PublicCommand> CreateCommand(CommandCreateDto commandCreateDto)
+        public ActionResult<CommandReadDto> CreateCommand(CommandCreateDto commandCreateDto)
         {
             var commandModel = _mapper.Map<Command>(commandCreateDto);
             _repository.CreateCommand(commandModel);
             _repository.SaveChanges();
 
-            var newCommand = _mapper.Map<PublicCommand>(commandModel);
+            var newCommand = _mapper.Map<CommandReadDto>(commandModel);
 
             var platformName = new Platform();
             

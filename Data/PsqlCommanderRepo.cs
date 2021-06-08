@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Commander.Dtos;
 using Commander.Models;
 
 
@@ -20,12 +21,12 @@ namespace Commander.Data
             return (_context.SaveChanges() >= 0);
         }
 
-        public IEnumerable<PublicCommand> GetAllCommands()
+        public IEnumerable<CommandReadDto> GetAllCommands()
         {
             return (_context.Commands.Join(_context.Platforms,
                             command => command.PlatformId,
                             platform => platform.Id,
-                            (command, platform) => new PublicCommand 
+                            (command, platform) => new CommandReadDto 
                             {
                                             Id = command.Id,
                                             HowTo = command.HowTo,
@@ -36,12 +37,12 @@ namespace Commander.Data
             
         }
 
-        public PublicCommand GetCommandById(int id)
+        public CommandReadDto GetCommandById(int id)
         {
             return _context.Commands.Join(_context.Platforms,
                             command => command.PlatformId,
                             platform => platform.Id,
-                            (command, platform) => new PublicCommand
+                            (command, platform) => new CommandReadDto
                             {
                                             Id = command.Id,
                                             HowTo = command.HowTo,
@@ -57,11 +58,7 @@ namespace Commander.Data
             {
                 throw new ArgumentNullException(nameof(cmd));
             }
-            
-            // var platform = _context.Platforms.FirstOrDefault(p => p.Id == cmd.PlatformId);
-            //
-            // if (platform == null) throw new Exception("PlatformId not found");
-            
+
             _context.Commands.Add(cmd);
         }
 

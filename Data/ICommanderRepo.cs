@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using Commander.Dtos;
 using Commander.Models;
 
@@ -9,8 +8,8 @@ namespace Commander.Data
     public interface ICommanderRepo
     {
         bool SaveChanges();
-        IEnumerable<PublicCommand> GetAllCommands();
-        PublicCommand GetCommandById(int id);
+        IEnumerable<CommandReadDto> GetAllCommands();
+        CommandReadDto GetCommandById(int id);
         
         void CreateCommand(Command cmd);
         void UpdateCommand(Command cmd);
