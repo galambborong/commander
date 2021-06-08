@@ -25,14 +25,13 @@ Currently, the API supports the following methods/endpoints:
 GET /api/commands
 POST /api/commands
 GET /api/commands/{id}
+DELETE /api/commands/{id}
 
 GET /api/platforms
 POST /api/platforms
 GET /api/platforms/{id}
 
 ```
-Formerly, full CRUD operations were available for `/api/commands`, but as I've developed this beyond the tutorial I am redesigning the API to meet my own needs. 
-A full range of CRUD operations will be supported in due course. 
 
 ### Tech stack
 
@@ -41,9 +40,8 @@ Commander makes use the following technologies, each with the principle aim of l
 - **.NET 5**
 - **C#** 
 - **PostgreSQL** database
-- **Entity Framework** as the ORM
-- **LINQ** as preferred querying language
-
+- **Entity Framework**
+- **LINQ**
 
 
 
