@@ -59,8 +59,7 @@ namespace Commander.Controllers
                 Console.WriteLine(e.Message);
                 return Problem();
             }
-          
-
+            
             newCommand.Platform = platformName.Name;
 
             return platformName.Name.Length > 0
