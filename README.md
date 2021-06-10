@@ -19,18 +19,21 @@ This is a project in development, so there's no hosted version at present - but 
 
 ### Current endpoints and methods
 
-Currently, the API supports the following methods/endpoints: 
+Currently, the API supports the following endpoints and request methods: 
 
 ```http
 GET /api/commands
 POST /api/commands
+
 GET /api/commands/{id}
 DELETE /api/commands/{id}
 
 GET /api/platforms
 POST /api/platforms
-GET /api/platforms/{id}
 
+GET /api/platforms/{id}
+PATCH /api/platforms/{id}
+DELETE /api/platforms/{id}
 ```
 
 ### Tech stack
