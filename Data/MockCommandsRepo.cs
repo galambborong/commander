@@ -15,25 +15,26 @@ namespace Commander.Data
 
         public IEnumerable<CommandReadDto> GetAllCommands()
         {
-            var commands = new List<CommandReadDto>
+            return new List<CommandReadDto>
             {
-                new CommandReadDto {Id = 0, HowTo = "Boil an egg", Line = "Boil water", Platform = "AUR"},
-                new CommandReadDto {Id = 1, HowTo = "Cut bread", Line = "Get a knife", Platform = "Jack"},
-                new CommandReadDto {Id = 2, HowTo = "Make a cup of tea", Line = "Pour boiling water over bag", Platform ="Hello"},
+                new CommandReadDto {Id = 0, HowTo = "Add DB migrations", Line = "dotnet ef migrations add <NAME>", Platform = "Entity"},
+                new CommandReadDto {Id = 1, HowTo = "Switch branch", Line = "git checkout <BRANCH>", Platform = "Git"},
+                new CommandReadDto {Id = 2, HowTo = "Update AUR packages", Line = "paru -Sua", Platform ="AUR", AdminPrivilegesRequired = true},
             };
-
-            return commands;
         }
 
         public CommandReadDto GetCommandById(int id)
         {
-            throw new NotImplementedException();
-            // return new PublicCommand {Id = 0, HowTo = "Boil an egg", Line = "Boil water", Platform = "Woo"};
+            return new CommandReadDto
+            {
+                            Id = 2, HowTo = "Update AUR packages", Line = "paru -Sua", Platform = "AUR", AdminPrivilegesRequired = true
+            };
         }
 
         public Command GetDbCommandById(int id)
         {
-            throw new NotImplementedException();
+            return new Command
+                            {Id = 2, HowTo = "Update AUR packages", Line = "paru -Sua", PlatformId = 4, AdminPrivilegesRequired = true};
         }
 
         public void CreateCommand(Command cmd)
