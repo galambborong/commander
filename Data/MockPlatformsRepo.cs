@@ -8,19 +8,18 @@ namespace Commander.Data
     {
         public IEnumerable<Platform> GetAllPlatforms()
         {
-            var platforms = new List<Platform>
+            return new List<Platform>
             {
                             new Platform {Id = 1, Name = "Linux"},
                             new Platform {Id = 2, Name = "Dotnet"},
-                            new Platform {Id = 3, Name = "Pacman"}
+                            new Platform {Id = 3, Name = "Pacman"},
+                            new Platform {Id = 4, Name = "Git"}
             };
-
-            return platforms;
         }
 
         public Platform GetPlatformById(int id)
         {
-            throw new NotImplementedException();
+            return new Platform {Id = 4, Name = "Git"};
         }
 
         public void CreatePlatform(Platform platform)
