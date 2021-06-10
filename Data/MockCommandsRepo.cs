@@ -34,7 +34,7 @@ namespace Commander.Data
         public Command GetDbCommandById(int id)
         {
             return new Command
-                            {Id = 2, HowTo = "Update AUR packages", Line = "paru -Sua", PlatformId = 4, AdminPrivilegesRequired = true};
+                            {Id = 2, HowTo = "Update AUR packages", Line = "paru -Sua", PlatformId = 5, AdminPrivilegesRequired = true};
         }
 
         public void CreateCommand(Command cmd)
