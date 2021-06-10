@@ -9,6 +9,7 @@ namespace Commander.Data
                 Platform GetPlatformById(int id);
                 void CreatePlatform(Platform platform);
                 void UpdatePlatform(Platform platform);
+                void DeletePlatform(Platform platform);
                 bool SaveChanges();
     }
 }
