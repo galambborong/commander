@@ -4,6 +4,7 @@ using System.Linq;
 using AutoMapper;
 using Commander.Data;
 using Commander.Models;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Commander.Controllers
@@ -13,6 +14,7 @@ namespace Commander.Controllers
     public class PlatformsController : ControllerBase
     {
         private readonly IPlatformsRepo _repository;
+        // TODO: Set up mapping for Platform
         // private readonly IMapper _mapper;
 
         public PlatformsController(IPlatformsRepo repository)
@@ -44,5 +46,20 @@ namespace Commander.Controllers
             return CreatedAtRoute(nameof(GetPlatformById), new {Id = newPlatform.Id}, newPlatform);
         }
 
+        [HttpPatch("{id}")]
+        public ActionResult PatchPlatform(int id, JsonPatchDocument<Platform> patchedPlatform)
+        {
+            var platformFromRepo = _repository.GetPlatformById(id);
+            if (platformFromRepo == null) return NotFound();
+            
+            patchedPlatform.ApplyTo(platformFromRepo, ModelState);
+
+            if (!TryValidateModel(platformFromRepo)) return ValidationProblem(ModelState);
+            
+            _repository.UpdatePlatform(platformFromRepo);
+            _repository.SaveChanges();
+
+            return NoContent();
+        }
     }
 }

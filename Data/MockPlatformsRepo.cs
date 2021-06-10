@@ -27,6 +27,11 @@ namespace Commander.Data
             throw new NotImplementedException();
         }
 
+        public void UpdatePlatform(Platform platform)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool SaveChanges()
         {
             throw new NotImplementedException();

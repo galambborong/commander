@@ -8,6 +8,7 @@ namespace Commander.Data
                 IEnumerable<Platform> GetAllPlatforms();
                 Platform GetPlatformById(int id);
                 void CreatePlatform(Platform platform);
+                void UpdatePlatform(Platform platform);
                 bool SaveChanges();
     }
 }

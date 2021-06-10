@@ -38,6 +38,11 @@ namespace Commander.Data
             _context.Platforms.Add(newPlatform);
         }
 
+        public void UpdatePlatform(Platform platform)
+        {
+            // do nothing
+        }
+
         public bool SaveChanges()
         {
             return (_context.SaveChanges() >= 0);
