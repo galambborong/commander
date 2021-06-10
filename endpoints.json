@@ -1,0 +1,19 @@
+{
+  "GET /api": {
+    "description": "serves up a json representation of all the available endpoints of the api"
+  },
+  "GET /api/platforms": {
+    "description": "serves an array of all available platforms",
+    "queries": [],
+    "exampleResponse": [
+      {
+        "id": 1,
+        "name": "Linux"
+      },
+      {
+        "id": 2,
+        "name": "Dotnet"
+      }
+    ]
+  }
+}
