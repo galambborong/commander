@@ -22,7 +22,9 @@ namespace Commander.Controllers
         public ActionResult<AliasReadDto> GetAliasByCommandId(int id)
         {
             var aliasItems = _aliasesRepo.GetAliasByCommandId(id);
-            return Ok(aliasItems);
+
+            var mappedAliasItem = _mapper.Map<AliasReadDto>(aliasItems);
+            return Ok(mappedAliasItem);
         }
     }
 }

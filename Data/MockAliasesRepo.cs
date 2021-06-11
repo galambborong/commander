@@ -1,12 +1,14 @@
+using System.Linq;
 using Commander.Dtos;
+using Commander.Models;
 
 namespace Commander.Data
 {
     public class MockAliasesRepo : IAliasesRepo
     {
-        public AliasReadDto GetAliasByCommandId(int id)
+        public IQueryable<Alias> GetAliasByCommandId(int id)
         {
-            return new AliasReadDto {Id = 1, Command = "git status", CommandAlias = "gs"};
+            throw new System.NotImplementedException();
         }
     }
 }
