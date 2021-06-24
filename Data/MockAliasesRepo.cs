@@ -6,7 +6,7 @@ namespace Commander.Data
 {
     public class MockAliasesRepo : IAliasesRepo
     {
-        public IQueryable<Alias> GetAliasByCommandId(int id)
+        public AliasMidWayDto GetAliasByCommandId(int id)
         {
             throw new System.NotImplementedException();
         }

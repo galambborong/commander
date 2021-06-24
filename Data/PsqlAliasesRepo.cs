@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Runtime.InteropServices;
 using Commander.Dtos;
 using Commander.Models;
 
@@ -12,16 +13,21 @@ namespace Commander.Data
         {
             _context = context;
         }
-        public IQueryable<Alias> GetAliasByCommandId(int id)
+
+        public AliasMidWayDto GetAliasByCommandId(int id)
         {
-            return _context.Aliases.Join(_context.Commands, alias => alias.CommandId, command => command.Id, (alias, command) =>
-                            new Alias()
+            return _context.Aliases.Join(_context.Commands, 
+                            alias => alias.CommandId, 
+                            command => command.Id, 
+                            (alias, command) =>
+                            new AliasMidWayDto
                             {
                                             Id = alias.Id,
-                                            CommandId = command.Id,
-                                            CommandAlias = alias.CommandAlias
-                            }).Where(p => id == p.CommandId);
-            
+                                            Command = command.Line,
+                                            CommandAlias = alias.CommandAlias,
+                                            CommandId = alias.CommandId
+                                            
+                            }).Where(p => id == p.CommandId).FirstOrDefault(p => p.CommandId == id);
         }
     }
 }

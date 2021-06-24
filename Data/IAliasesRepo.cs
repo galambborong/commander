@@ -7,6 +7,6 @@ namespace Commander.Data
 {
     public interface IAliasesRepo
     {
-        IQueryable<Alias> GetAliasByCommandId(int id);
+        AliasMidWayDto GetAliasByCommandId(int id);
     }
 }

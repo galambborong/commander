@@ -1,3 +1,4 @@
+using System;
 using AutoMapper;
 using Commander.Data;
 using Commander.Dtos;
@@ -22,8 +23,8 @@ namespace Commander.Controllers
         public ActionResult<AliasReadDto> GetAliasByCommandId(int id)
         {
             var aliasItems = _aliasesRepo.GetAliasByCommandId(id);
-
             var mappedAliasItem = _mapper.Map<AliasReadDto>(aliasItems);
+            
             return Ok(mappedAliasItem);
         }
     }

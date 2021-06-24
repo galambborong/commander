@@ -1,6 +1,5 @@
 using AutoMapper;
 using Commander.Dtos;
-using Commander.Models;
 
 namespace Commander.Profiles
 {
@@ -8,7 +7,7 @@ namespace Commander.Profiles
     {
         public AliasesProfile()
         {
-            CreateMap<Alias, AliasReadDto>();
+            CreateMap<AliasMidWayDto, AliasReadDto>();
         }
     }
 }
