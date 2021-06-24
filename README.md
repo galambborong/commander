@@ -10,23 +10,28 @@ This is a project in development, so there's no hosted version at present - but 
 
 ## What is Commander?
 
-**Commander** is a REST API which stores summary information about CLI commands. Example:
+**Commander** is a REST API which stores summary information about CLI commands. This is an example response from the `/api/commands/` endpoint.
 
 | Id | HowTo | Line | Platform | AdminPrivilegesRequired |
 |---|---|---|---|---|
 | 1 | Update AUR packages | paru -Sua | AUR | true |
-| 2 | Add DB migrations | dotnet ef migrations add <NAME> | Entity | false |
+| 2 | Add DB migrations | dotnet ef migrations add \<NAME> | Entity | false |
 
+See `/api` for a detailed description of the various available endpoints.
 ### Current endpoints and methods
 
 Currently, the API supports the following endpoints and request methods: 
 
 ```http
+GET /api
+
 GET /api/commands
 POST /api/commands
 
 GET /api/commands/{id}
 DELETE /api/commands/{id}
+
+GET /api/commands/{id}/alias
 
 GET /api/platforms
 POST /api/platforms
@@ -36,13 +41,13 @@ PATCH /api/platforms/{id}
 DELETE /api/platforms/{id}
 ```
 
-### Tech stack
+### Tech stack and libraries
 
 Commander makes use the following technologies, each with the principle aim of learning them 
 
 - **.NET 5**
 - **C#** 
-- **PostgreSQL** database
+- **PostgreSQL**
 - **Entity Framework**
 - **LINQ**
 
