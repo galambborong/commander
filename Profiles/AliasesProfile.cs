@@ -7,7 +7,7 @@ namespace Commander.Profiles
     {
         public AliasesProfile()
         {
-            CreateMap<AliasMidWayDto, AliasReadDto>();
+            CreateMap<AliasMidWay, AliasReadDto>();
         }
     }
 }

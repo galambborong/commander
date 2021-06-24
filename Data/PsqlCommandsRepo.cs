@@ -49,7 +49,7 @@ namespace Commander.Data
                                             Line = command.Line,
                                             Platform = platform.Name,
                                             AdminPrivilegesRequired = command.AdminPrivilegesRequired
-                            }).Where(p => p.Id == id).FirstOrDefault(p => p.Id == id);
+                            }).FirstOrDefault(p => p.Id == id);
         }
 
         public Command GetDbCommandById(int id)

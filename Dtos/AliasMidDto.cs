@@ -1,6 +1,6 @@
 namespace Commander.Dtos
 {
-    public class AliasMidWayDto
+    public class AliasMidWay
     {
         public int Id { get; set; }
         public string CommandAlias { get; set; }

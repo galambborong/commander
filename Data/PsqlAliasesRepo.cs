@@ -14,20 +14,20 @@ namespace Commander.Data
             _context = context;
         }
 
-        public AliasMidWayDto GetAliasByCommandId(int id)
+        public AliasMidWay GetAliasByCommandId(int id)
         {
             return _context.Aliases.Join(_context.Commands, 
                             alias => alias.CommandId, 
                             command => command.Id, 
                             (alias, command) =>
-                            new AliasMidWayDto
+                            new AliasMidWay
                             {
                                             Id = alias.Id,
                                             Command = command.Line,
                                             CommandAlias = alias.CommandAlias,
                                             CommandId = alias.CommandId
                                             
-                            }).Where(p => id == p.CommandId).FirstOrDefault(p => p.CommandId == id);
+                            }).FirstOrDefault(p => p.CommandId == id);
         }
     }
 }
