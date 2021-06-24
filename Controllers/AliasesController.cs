@@ -22,10 +22,10 @@ namespace Commander.Controllers
         [HttpGet]
         public ActionResult<AliasReadDto> GetAliasByCommandId(int id)
         {
-            var aliasItems = _aliasesRepo.GetAliasByCommandId(id);
-            var mappedAliasItem = _mapper.Map<AliasReadDto>(aliasItems);
-            
-            return Ok(mappedAliasItem);
+            var aliasItem = _aliasesRepo.GetAliasByCommandId(id);
+            var mappedAliasItem = _mapper.Map<AliasReadDto>(aliasItem);
+
+            return aliasItem != null ? Ok(mappedAliasItem) : NotFound();
         }
     }
 }
