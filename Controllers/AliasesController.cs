@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Commander.Controllers
 {
-    [Route("/api/commands/{id}/alias")]
+    [Route("/api/commands/{id:int}/alias")]
     [ApiController]
     public class AliasesController : ControllerBase
     {
@@ -39,7 +39,7 @@ namespace Commander.Controllers
 
             var midAlias = _mapper.Map<AliasMidWay>(newAlias);
 
-            var command = new Command();
+            Command command;
 
             try
             {
@@ -56,7 +56,7 @@ namespace Commander.Controllers
             var mappedAlias = _mapper.Map<AliasReadDto>(midAlias);
             
             return command.Line.Length > 0 
-                            ? Ok(mappedAlias)
+                            ? CreatedAtRoute(nameof(GetAliasByCommandId), new { Id = command.Id}, mappedAlias)
                             : Problem(statusCode: 405);
         }
     }

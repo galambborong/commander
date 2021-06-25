@@ -30,7 +30,7 @@ namespace Commander.Controllers
             return Ok(commandItems);
         }
 
-        [HttpGet("{id}", Name="GetCommandById")]
+        [HttpGet("{id:int}", Name="GetCommandById")]
         public ActionResult<CommandReadDto> GetCommandById(int id)
         {
             var commandItem = _commandsRepo.GetCommandById(id);
@@ -47,7 +47,7 @@ namespace Commander.Controllers
 
             var newCommand = _mapper.Map<CommandReadDto>(commandModel);
 
-            var platformName = new Platform();
+            Platform platformName;
             
             try
             {
@@ -62,11 +62,11 @@ namespace Commander.Controllers
             newCommand.Platform = platformName.Name;
 
             return platformName.Name.Length > 0
-                            ? CreatedAtRoute(nameof(GetCommandById), new {Id = newCommand.Id}, newCommand)
+                            ? CreatedAtRoute(nameof(GetCommandById), new {newCommand.Id}, newCommand)
                             : Problem(statusCode: 405);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:int}")]
         public ActionResult DeleteCommand(int id)
         {
             var commandModelFromRepo = _commandsRepo.GetDbCommandById(id);

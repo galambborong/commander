@@ -1,7 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using AutoMapper;
 using Commander.Data;
 using Commander.Models;
 using Microsoft.AspNetCore.JsonPatch;
@@ -30,7 +27,7 @@ namespace Commander.Controllers
             return Ok(platformItems);
         }
 
-        [HttpGet("{id}", Name="GetPlatformById")]
+        [HttpGet("{id:int}", Name="GetPlatformById")]
         public ActionResult<Platform> GetPlatformById(int id)
         {
             var platformItem = _repository.GetPlatformById(id);
@@ -43,10 +40,10 @@ namespace Commander.Controllers
             _repository.CreatePlatform(newPlatform);
             _repository.SaveChanges();
 
-            return CreatedAtRoute(nameof(GetPlatformById), new {Id = newPlatform.Id}, newPlatform);
+            return CreatedAtRoute(nameof(GetPlatformById), new {newPlatform.Id}, newPlatform);
         }
 
-        [HttpPatch("{id}")]
+        [HttpPatch("{id:int}")]
         public ActionResult PatchPlatform(int id, JsonPatchDocument<Platform> patchedPlatform)
         {
             var platformFromRepo = _repository.GetPlatformById(id);
