@@ -2,9 +2,9 @@
 
 ## Intro/aims
 
-This project initially took shape when following this [tutorial](https://www.youtube.com/watch?v=fmvcAzHpsk8), by way of re-familiarising myself with C#, having been more or less only working in JavaScript since October 2020, and having had limited C# exposure beforehand.
+This project initially took shape while following this [tutorial](https://www.youtube.com/watch?v=fmvcAzHpsk8) by way of re-familiarising myself with C#, having been working more or less only in JavaScript since October 2020, and having had limited C# exposure beforehand.
 
-I've been extending it beyond the scope of the tutorial, and using it as a project to learn and turn it into an actual application that suits my needs.
+I've extended it far beyond the scope of the tutorial, using it as a chance to learn about Entity and LINQ, as well as turning it into an application that actually suits my needs.
 
 This is a project in development, so there's no hosted version at present - but I'll likely deploy it soon. 
 
@@ -32,6 +32,7 @@ GET /api/commands/{id}
 DELETE /api/commands/{id}
 
 GET /api/commands/{id}/alias
+POST /api/commands/{id}/alias
 
 GET /api/platforms
 POST /api/platforms
