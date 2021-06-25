@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Runtime.InteropServices;
 using Commander.Dtos;
@@ -28,6 +29,21 @@ namespace Commander.Data
                                             CommandId = alias.CommandId
                                             
                             }).FirstOrDefault(p => p.CommandId == id);
+        }
+
+        public void CreateAlias(Alias newAlias)
+        {
+            if (newAlias == null)
+            {
+                throw new ArgumentNullException(nameof(newAlias));
+            }
+
+            _context.Aliases.Add(newAlias);
+        }
+
+        public bool SaveChanges()
+        {
+            return (_context.SaveChanges() >= 0);
         }
     }
 }

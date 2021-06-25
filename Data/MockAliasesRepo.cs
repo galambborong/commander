@@ -10,5 +10,15 @@ namespace Commander.Data
         {
             throw new System.NotImplementedException();
         }
+
+        public void CreateAlias(Alias newAlias)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool SaveChanges()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

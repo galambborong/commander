@@ -8,5 +8,7 @@ namespace Commander.Data
     public interface IAliasesRepo
     {
         AliasMidWay GetAliasByCommandId(int id);
+        void CreateAlias(Alias newAlias);
+        bool SaveChanges();
     }
 }
