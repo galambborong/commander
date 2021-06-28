@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Commander.Dtos;
 using Commander.Models;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace Commander.Data
@@ -16,14 +18,14 @@ namespace Commander.Data
             _context = context;
         }
 
-        public bool SaveChanges()
+        public async Task<bool> SaveChangesAsync()
         {
-            return (_context.SaveChanges() >= 0);
+           return (await _context.SaveChangesAsync() >= 0);
         }
 
-        public IEnumerable<CommandReadDto> GetAllCommands()
+        public async Task<IAsyncEnumerable<CommandReadDto>> GetAllCommandsAsync()
         {
-            return (_context.Commands.Join(_context.Platforms,
+           return (_context.Commands.Join(_context.Platforms,
                             command => command.PlatformId,
                             platform => platform.Id,
                             (command, platform) => new CommandReadDto 
@@ -33,11 +35,11 @@ namespace Commander.Data
                                             Line = command.Line,
                                             Platform = platform.Name,
                                             AdminPrivilegesRequired = command.AdminPrivilegesRequired
-                            })).AsEnumerable();
+                            })).AsAsyncEnumerable();
             
         }
 
-        public CommandReadDto GetCommandById(int id)
+        public async Task<CommandReadDto> GetCommandByIdAsync(int id)
         {
             return _context.Commands.Join(_context.Platforms,
                             command => command.PlatformId,
@@ -52,33 +54,32 @@ namespace Commander.Data
                             }).FirstOrDefault(p => p.Id == id);
         }
 
-        public Command GetDbCommandById(int id)
+        public async Task<Command> GetDbCommandByIdAsync(int id)
         {
             return _context.Commands.FirstOrDefault((p => p.Id == id));
         }
 
-        public void CreateCommand(Command cmd)
+        public Task CreateCommandAsync(Command cmd)
         {
             if (cmd == null)
             {
                 throw new ArgumentNullException(nameof(cmd));
             }
 
-            _context.Commands.Add(cmd);
+            return _context.Commands.Add(cmd);
         }
 
-        public void UpdateCommand(Command cmd)
+        public Task UpdateCommandAsync(Command cmd)
         {
             // Do nothing... this is counter intuitive...
         }
 
-        public void DeleteCommand(Command cmd)
+        public Task DeleteCommandAsync(Command cmd)
         {
             if (cmd == null)
             {
                 throw new ArgumentNullException(nameof(cmd));
             }
-
             _context.Commands.Remove(cmd);
         }
     }

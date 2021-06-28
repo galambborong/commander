@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Commander.Dtos;
 using Commander.Models;
 
@@ -7,12 +8,12 @@ namespace Commander.Data
 {
     public class MockCommandsRepo : ICommandsRepo
     {
-        public bool SaveChanges()
+        public Task<bool> SaveChangesAsync()
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<CommandReadDto> GetAllCommands()
+        public async Task<IAsyncEnumerable<CommandReadDto>> GetAllCommandsAsync()
         {
             return new List<CommandReadDto>
             {
@@ -22,7 +23,7 @@ namespace Commander.Data
             };
         }
 
-        public CommandReadDto GetCommandById(int id)
+        public async Task<CommandReadDto> GetCommandByIdAsync(int id)
         {
             return new CommandReadDto
             {
@@ -30,27 +31,25 @@ namespace Commander.Data
             };
         }
 
-        public Command GetDbCommandById(int id)
+        public async Task<Command> GetDbCommandByIdAsync(int id)
         {
             return new Command
                             {Id = 2, HowTo = "Update AUR packages", Line = "paru -Sua", PlatformId = 5, AdminPrivilegesRequired = true};
         }
 
-        public void CreateCommand(Command cmd)
+        public async Task CreateCommandAsync(Command cmd)
         {
             throw new NotImplementedException();
         }
 
-        public void UpdateCommand(Command cmd)
+        public async Task UpdateCommandAsync(Command cmd)
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteCommand(Command cmd)
+        public async Task DeleteCommandAsync(Command cmd)
         {
             throw new NotImplementedException();
         }
-        
-       
     }
 }
