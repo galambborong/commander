@@ -47,7 +47,7 @@ namespace Commander.Data
             throw new NotImplementedException();
         }
 
-        public async Task DeleteCommandAsync(Command cmd)
+        public async void DeleteCommandAsync(Command cmd)
         {
             throw new NotImplementedException();
         }

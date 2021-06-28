@@ -20,23 +20,23 @@ namespace Commander.Data
 
         public async Task<bool> SaveChangesAsync()
         {
-           return (await _context.SaveChangesAsync() >= 0);
+            return (await _context.SaveChangesAsync() >= 0);
         }
 
         public async Task<IAsyncEnumerable<CommandReadDto>> GetAllCommandsAsync()
         {
-           return (_context.Commands.Join(_context.Platforms,
-                            command => command.PlatformId,
-                            platform => platform.Id,
-                            (command, platform) => new CommandReadDto 
-                            {
-                                            Id = command.Id,
-                                            HowTo = command.HowTo,
-                                            Line = command.Line,
-                                            Platform = platform.Name,
-                                            AdminPrivilegesRequired = command.AdminPrivilegesRequired
-                            })).AsAsyncEnumerable();
-            
+            return (_context.Commands.Join(_context.Platforms,
+                             command => command.PlatformId,
+                             platform => platform.Id,
+                             (command, platform) => new CommandReadDto 
+                             {
+                                             Id = command.Id,
+                                             HowTo = command.HowTo,
+                                             Line = command.Line,
+                                             Platform = platform.Name,
+                                             AdminPrivilegesRequired = command.AdminPrivilegesRequired
+                             })).AsAsyncEnumerable();
+             
         }
 
         public async Task<CommandReadDto> GetCommandByIdAsync(int id)
@@ -59,22 +59,22 @@ namespace Commander.Data
             return await _context.Commands.FirstOrDefaultAsync((p => p.Id == id));
         }
 
-        public Task CreateCommandAsync(Command cmd)
+        public async Task CreateCommandAsync(Command cmd)
         {
             if (cmd == null)
             {
                 throw new ArgumentNullException(nameof(cmd));
             }
 
-            _context.Commands.Add(cmd);
+            await _context.Commands.AddAsync(cmd);
         }
 
-        public Task UpdateCommandAsync(Command cmd)
+        public void UpdateCommandAsync(Command cmd)
         {
             // Do nothing... this is counter intuitive...
         }
 
-        public Task DeleteCommandAsync(Command cmd)
+        public void DeleteCommandAsync(Command cmd)
         {
             if (cmd == null)
             {

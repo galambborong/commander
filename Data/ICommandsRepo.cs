@@ -14,7 +14,7 @@ namespace Commander.Data
         Task<Command> GetDbCommandByIdAsync(int id);
         
         Task CreateCommandAsync(Command cmd);
-        Task UpdateCommandAsync(Command cmd);
-        Task DeleteCommandAsync(Command cmd);
+        void UpdateCommandAsync(Command cmd);
+        void DeleteCommandAsync(Command cmd);
     }
 }
