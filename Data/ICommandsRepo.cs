@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Commander.Dtos;
 using Commander.Models;
 
@@ -7,13 +8,13 @@ namespace Commander.Data
 {
     public interface ICommandsRepo
     {
-        bool SaveChanges();
-        IEnumerable<CommandReadDto> GetAllCommands();
-        CommandReadDto GetCommandById(int id);
-        Command GetDbCommandById(int id);
+        Task<bool> SaveChangesAsync();
+        Task<IAsyncEnumerable<CommandReadDto>> GetAllCommandsAsync();
+        Task<CommandReadDto> GetCommandByIdAsync(int id);
+        Task<Command> GetDbCommandByIdAsync(int id);
         
-        void CreateCommand(Command cmd);
-        void UpdateCommand(Command cmd);
-        void DeleteCommand(Command cmd);
+        Task CreateCommandAsync(Command cmd);
+        Task UpdateCommandAsync(Command cmd);
+        Task DeleteCommandAsync(Command cmd);
     }
 }
