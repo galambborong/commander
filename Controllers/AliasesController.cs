@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using AutoMapper;
 using Commander.Data;
 using Commander.Dtos;
@@ -32,7 +33,7 @@ namespace Commander.Controllers
         }
 
         [HttpPost]
-        public ActionResult<AliasReadDto> CreateAlias(Alias newAlias, int id)
+        public async Task<ObjectResult> CreateAlias(Alias newAlias, int id)
         {
             _aliasesRepo.CreateAlias(newAlias);
             _aliasesRepo.SaveChanges();
@@ -43,7 +44,7 @@ namespace Commander.Controllers
 
             try
             {
-                command = _commandsRepo.GetDbCommandByIdAsync(id);
+                command = await _commandsRepo.GetDbCommandByIdAsync(id);
             }
             catch (Exception e)
             {

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using AutoMapper;
 using Commander.Data;
 using Commander.Dtos;
@@ -24,26 +25,26 @@ namespace Commander.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<CommandReadDto>> GetAllCommands()
+        public ActionResult<IAsyncEnumerable<CommandReadDto>> GetAllCommands()
         {
-            var commandItems = _commandsRepo.GetAllCommandsAsync();
+            var commandItems = _commandsRepo.GetAllCommands();
             return Ok(commandItems);
         }
 
         [HttpGet("{id:int}", Name="GetCommandById")]
-        public ActionResult<CommandReadDto> GetCommandById(int id)
+        public async Task<ActionResult<CommandReadDto>> GetCommandByIdAsync(int id)
         {
-            var commandItem = _commandsRepo.GetCommandByIdAsync(id);
+            var commandItem = await _commandsRepo.GetCommandByIdAsync(id);
 
             return commandItem != null ? Ok(commandItem) : NotFound();
         }
 
         [HttpPost]
-        public ActionResult<CommandReadDto> CreateCommand(CommandCreateDto commandCreateDto)
+        public async Task<ObjectResult> CreateCommand(CommandCreateDto commandCreateDto)
         {
             var commandModel = _mapper.Map<Command>(commandCreateDto);
-            _commandsRepo.CreateCommandAsync(commandModel);
-            _commandsRepo.SaveChangesAsync();
+            await _commandsRepo.CreateCommandAsync(commandModel);
+            await _commandsRepo.SaveChangesAsync();
 
             var newCommand = _mapper.Map<CommandReadDto>(commandModel);
 
@@ -62,19 +63,19 @@ namespace Commander.Controllers
             newCommand.Platform = platformName.Name;
 
             return platformName.Name.Length > 0
-                            ? CreatedAtRoute(nameof(GetCommandById), new {newCommand.Id}, newCommand)
+                            ? CreatedAtRoute(nameof(GetCommandByIdAsync), new {newCommand.Id}, newCommand)
                             : Problem(statusCode: 405);
         }
 
         [HttpDelete("{id:int}")]
-        public ActionResult DeleteCommand(int id)
+        public async Task<ActionResult> DeleteCommand(int id)
         {
-            var commandModelFromRepo = _commandsRepo.GetDbCommandByIdAsync(id);
-            
-            if (commandModelFromRepo == null) return NotFound();
+            var commandModelFromRepoAsync = await _commandsRepo.GetDbCommandByIdAsync(id);
 
-            _commandsRepo.DeleteCommandAsync(commandModelFromRepo);
-            _commandsRepo.SaveChangesAsync();
+            if (commandModelFromRepoAsync == null) return NotFound();
+
+            _commandsRepo.DeleteCommand(commandModelFromRepoAsync);
+            await _commandsRepo.SaveChangesAsync();
 
             return NoContent();
         }

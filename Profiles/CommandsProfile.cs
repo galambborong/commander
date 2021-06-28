@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using AutoMapper;
 using Commander.Dtos;
 using Commander.Models;
@@ -13,6 +14,7 @@ namespace Commander.Profiles
             CreateMap<CommandUpdateDto, Command>();
             CreateMap<Command, CommandUpdateDto>();
             CreateMap<CommandReadDto, Command>();
+            // CreateMap<Task<Command>, Command();
         }
     }
 }

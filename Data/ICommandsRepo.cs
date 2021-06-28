@@ -9,12 +9,12 @@ namespace Commander.Data
     public interface ICommandsRepo
     {
         Task<bool> SaveChangesAsync();
-        Task<IAsyncEnumerable<CommandReadDto>> GetAllCommandsAsync();
+        IAsyncEnumerable<CommandReadDto> GetAllCommands();
         Task<CommandReadDto> GetCommandByIdAsync(int id);
         Task<Command> GetDbCommandByIdAsync(int id);
         
         Task CreateCommandAsync(Command cmd);
-        void UpdateCommandAsync(Command cmd);
-        void DeleteCommandAsync(Command cmd);
+        void UpdateCommand(Command cmd);
+        void DeleteCommand(Command cmd);
     }
 }

@@ -23,7 +23,7 @@ namespace Commander.Data
             return (await _context.SaveChangesAsync() >= 0);
         }
 
-        public async Task<IAsyncEnumerable<CommandReadDto>> GetAllCommandsAsync()
+        public IAsyncEnumerable<CommandReadDto> GetAllCommands()
         {
             return (_context.Commands.Join(_context.Platforms,
                              command => command.PlatformId,
@@ -69,12 +69,12 @@ namespace Commander.Data
             await _context.Commands.AddAsync(cmd);
         }
 
-        public void UpdateCommandAsync(Command cmd)
+        public void UpdateCommand(Command cmd)
         {
             // Do nothing... this is counter intuitive...
         }
 
-        public void DeleteCommandAsync(Command cmd)
+        public void DeleteCommand(Command cmd)
         {
             if (cmd == null)
             {

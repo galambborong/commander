@@ -3,38 +3,49 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Commander.Dtos;
 using Commander.Models;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 
 namespace Commander.Data
 {
     public class MockCommandsRepo : ICommandsRepo
     {
+        public bool SaveChanges()
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<bool> SaveChangesAsync()
         {
             throw new NotImplementedException();
         }
 
-        public async Task<IAsyncEnumerable<CommandReadDto>> GetAllCommandsAsync()
+        public IAsyncEnumerable<CommandReadDto> GetAllCommands()
         {
-            return new List<CommandReadDto>
-            {
-                new CommandReadDto {Id = 0, HowTo = "Add DB migrations", Line = "dotnet ef migrations add <NAME>", Platform = "Entity"},
-                new CommandReadDto {Id = 1, HowTo = "Switch branch", Line = "git checkout <BRANCH>", Platform = "Git"},
-                new CommandReadDto {Id = 2, HowTo = "Update AUR packages", Line = "paru -Sua", Platform ="AUR", AdminPrivilegesRequired = true},
-            };
+        //     var commands = new List<CommandReadDto>
+        //     {
+        //         new CommandReadDto {Id = 0, HowTo = "Add DB migrations", Line = "dotnet ef migrations add <NAME>", Platform = "Entity"},
+        //         new CommandReadDto {Id = 1, HowTo = "Switch branch", Line = "git checkout <BRANCH>", Platform = "Git"},
+        //         new CommandReadDto {Id = 2, HowTo = "Update AUR packages", Line = "paru -Sua", Platform ="AUR", AdminPrivilegesRequired = true},
+        //     };
+
+
+        throw new NotImplementedException();
         }
 
         public async Task<CommandReadDto> GetCommandByIdAsync(int id)
         {
-            return new CommandReadDto
+            var command = new CommandReadDto
             {
                             Id = 2, HowTo = "Update AUR packages", Line = "paru -Sua", Platform = "AUR", AdminPrivilegesRequired = true
             };
+
+            return await Task.FromResult(command);
         }
 
         public async Task<Command> GetDbCommandByIdAsync(int id)
         {
-            return new Command
-                            {Id = 2, HowTo = "Update AUR packages", Line = "paru -Sua", PlatformId = 5, AdminPrivilegesRequired = true};
+            var commands = new Command {Id = 2, HowTo = "Update AUR packages", Line = "paru -Sua", PlatformId = 5, AdminPrivilegesRequired = true};
+            return await Task.FromResult(commands);
         }
 
         public async Task CreateCommandAsync(Command cmd)
@@ -42,12 +53,17 @@ namespace Commander.Data
             throw new NotImplementedException();
         }
 
-        public async Task UpdateCommandAsync(Command cmd)
+        public void UpdateCommand(Command cmd)
         {
             throw new NotImplementedException();
         }
 
-        public async void DeleteCommandAsync(Command cmd)
+        public void DeleteCommand(Command cmd)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteCommand(Task<Command> cmd)
         {
             throw new NotImplementedException();
         }
