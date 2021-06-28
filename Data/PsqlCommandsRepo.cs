@@ -41,7 +41,7 @@ namespace Commander.Data
 
         public async Task<CommandReadDto> GetCommandByIdAsync(int id)
         {
-            return _context.Commands.Join(_context.Platforms,
+            return await _context.Commands.Join(_context.Platforms,
                             command => command.PlatformId,
                             platform => platform.Id,
                             (command, platform) => new CommandReadDto
@@ -51,12 +51,12 @@ namespace Commander.Data
                                             Line = command.Line,
                                             Platform = platform.Name,
                                             AdminPrivilegesRequired = command.AdminPrivilegesRequired
-                            }).FirstOrDefault(p => p.Id == id);
+                            }).FirstOrDefaultAsync(p => p.Id == id);
         }
 
         public async Task<Command> GetDbCommandByIdAsync(int id)
         {
-            return _context.Commands.FirstOrDefault((p => p.Id == id));
+            return await _context.Commands.FirstOrDefaultAsync((p => p.Id == id));
         }
 
         public Task CreateCommandAsync(Command cmd)
@@ -66,7 +66,7 @@ namespace Commander.Data
                 throw new ArgumentNullException(nameof(cmd));
             }
 
-            return _context.Commands.Add(cmd);
+            _context.Commands.Add(cmd);
         }
 
         public Task UpdateCommandAsync(Command cmd)
