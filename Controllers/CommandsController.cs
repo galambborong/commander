@@ -26,14 +26,14 @@ namespace Commander.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<CommandReadDto>> GetAllCommands()
         {
-            var commandItems = _commandsRepo.GetAllCommands();
+            var commandItems = _commandsRepo.GetAllCommandsAsync();
             return Ok(commandItems);
         }
 
         [HttpGet("{id:int}", Name="GetCommandById")]
         public ActionResult<CommandReadDto> GetCommandById(int id)
         {
-            var commandItem = _commandsRepo.GetCommandById(id);
+            var commandItem = _commandsRepo.GetCommandByIdAsync(id);
 
             return commandItem != null ? Ok(commandItem) : NotFound();
         }
@@ -42,8 +42,8 @@ namespace Commander.Controllers
         public ActionResult<CommandReadDto> CreateCommand(CommandCreateDto commandCreateDto)
         {
             var commandModel = _mapper.Map<Command>(commandCreateDto);
-            _commandsRepo.CreateCommand(commandModel);
-            _commandsRepo.SaveChanges();
+            _commandsRepo.CreateCommandAsync(commandModel);
+            _commandsRepo.SaveChangesAsync();
 
             var newCommand = _mapper.Map<CommandReadDto>(commandModel);
 
@@ -69,12 +69,12 @@ namespace Commander.Controllers
         [HttpDelete("{id:int}")]
         public ActionResult DeleteCommand(int id)
         {
-            var commandModelFromRepo = _commandsRepo.GetDbCommandById(id);
+            var commandModelFromRepo = _commandsRepo.GetDbCommandByIdAsync(id);
             
             if (commandModelFromRepo == null) return NotFound();
 
-            _commandsRepo.DeleteCommand(commandModelFromRepo);
-            _commandsRepo.SaveChanges();
+            _commandsRepo.DeleteCommandAsync(commandModelFromRepo);
+            _commandsRepo.SaveChangesAsync();
 
             return NoContent();
         }

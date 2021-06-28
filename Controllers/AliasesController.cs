@@ -43,7 +43,7 @@ namespace Commander.Controllers
 
             try
             {
-                command = _commandsRepo.GetDbCommandById(id);
+                command = _commandsRepo.GetDbCommandByIdAsync(id);
             }
             catch (Exception e)
             {
