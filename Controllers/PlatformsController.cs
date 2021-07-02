@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Commander.Data;
 using Commander.Models;
 using Microsoft.AspNetCore.JsonPatch;
@@ -27,34 +29,35 @@ namespace Commander.Controllers
             return Ok(platformItems);
         }
 
-        [HttpGet("{id:int}", Name="GetPlatformById")]
-        public ActionResult<Platform> GetPlatformById(int id)
+        [HttpGet("{id:int}", Name="GetPlatformByIdAsync")]
+        public async Task<ActionResult<Platform>> GetPlatformByIdAsync(int id)
         {
-            var platformItem = _repository.GetPlatformById(id);
+            Console.WriteLine($"{id}<<");
+            var platformItem = await _repository.GetPlatformByIdAsync(id);
             return platformItem != null ? Ok(platformItem) : NotFound();
         }
 
         [HttpPost]
-        public ActionResult<Platform> CreatePlatform(Platform newPlatform)
+        public async Task<ActionResult<Platform>> CreatePlatformAsync(Platform newPlatform)
         {
-            _repository.CreatePlatform(newPlatform);
-            _repository.SaveChanges();
+            await _repository.CreatePlatformAsync(newPlatform);
+            await _repository.SaveChangesAsync();
 
-            return CreatedAtRoute(nameof(GetPlatformById), new {newPlatform.Id}, newPlatform);
+            return CreatedAtRoute(nameof(GetPlatformByIdAsync), new {newPlatform.Id}, newPlatform);
         }
 
         [HttpPatch("{id:int}")]
-        public ActionResult PatchPlatform(int id, JsonPatchDocument<Platform> patchedPlatform)
+        public async Task<ActionResult> PatchPlatform(int id, JsonPatchDocument<Platform> patchedPlatform)
         {
-            var platformFromRepo = _repository.GetPlatformById(id);
+            var platformFromRepo = await _repository.GetPlatformByIdAsync(id);
             if (platformFromRepo == null) return NotFound();
             
             patchedPlatform.ApplyTo(platformFromRepo, ModelState);
 
             if (!TryValidateModel(platformFromRepo)) return ValidationProblem(ModelState);
             
-            _repository.UpdatePlatform(platformFromRepo);
-            _repository.SaveChanges();
+            await _repository.UpdatePlatformAsync(platformFromRepo);
+            await _repository.SaveChangesAsync();
 
             return NoContent();
         }
