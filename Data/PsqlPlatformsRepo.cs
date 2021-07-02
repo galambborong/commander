@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Commander.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Commander.Data
 {
@@ -19,19 +21,19 @@ namespace Commander.Data
             return _context.Platforms.ToList();
         }
 
-        public Platform GetPlatformById(int id)
+        public async Task<Platform> GetPlatformByIdAsync(int id)
         {
-            return _context.Platforms.FirstOrDefault(p => p.Id == id);
+            return await _context.Platforms.FirstOrDefaultAsync(p => p.Id == id);
         }
 
-        public void CreatePlatform(Platform newPlatform)
+        public async Task CreatePlatformAsync(Platform newPlatform)
         {
             if (newPlatform == null) throw new ArgumentNullException(nameof(newPlatform));
 
-            _context.Platforms.Add(newPlatform);
+            await _context.Platforms.AddAsync(newPlatform);
         }
 
-        public void UpdatePlatform(Platform platform)
+        public async Task UpdatePlatformAsync(Platform platform)
         {
             // do nothing
         }
@@ -43,9 +45,9 @@ namespace Commander.Data
             _context.Platforms.Remove(platform);
         }
 
-        public bool SaveChanges()
+        public async Task<bool> SaveChangesAsync()
         {
-            return (_context.SaveChanges() >= 0);
+            return await _context.SaveChangesAsync() >= 0;
         }
     }
 }

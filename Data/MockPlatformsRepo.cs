@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Commander.Models;
 
 namespace Commander.Data
@@ -17,17 +18,18 @@ namespace Commander.Data
             };
         }
 
-        public Platform GetPlatformById(int id)
+        public Task<Platform> GetPlatformByIdAsync(int id)
         {
-            return new Platform {Id = 4, Name = "Git"};
+            var platform = new Platform {Id = 4, Name = "Git"};
+            return Task.FromResult(platform);
         }
 
-        public void CreatePlatform(Platform platform)
+        public Task CreatePlatformAsync(Platform platform)
         {
             throw new NotImplementedException();
         }
 
-        public void UpdatePlatform(Platform platform)
+        public Task UpdatePlatformAsync(Platform platform)
         {
             throw new NotImplementedException();
         }
@@ -37,7 +39,7 @@ namespace Commander.Data
             throw new NotImplementedException();
         }
 
-        public bool SaveChanges()
+        public Task<bool> SaveChangesAsync()
         {
             throw new NotImplementedException();
         }
