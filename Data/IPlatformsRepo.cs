@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Commander.Models;
 
 namespace Commander.Data
@@ -6,10 +7,10 @@ namespace Commander.Data
     public interface IPlatformsRepo
     {
                 IEnumerable<Platform> GetAllPlatforms();
-                Platform GetPlatformById(int id);
-                void CreatePlatform(Platform platform);
-                void UpdatePlatform(Platform platform);
+                Task<Platform> GetPlatformByIdAsync(int id);
+                Task CreatePlatformAsync(Platform platform);
+                Task UpdatePlatformAsync(Platform platform);
                 void DeletePlatform(Platform platform);
-                bool SaveChanges();
+                Task<bool> SaveChangesAsync();
     }
 }
