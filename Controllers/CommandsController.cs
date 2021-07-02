@@ -40,7 +40,7 @@ namespace Commander.Controllers
         }
 
         [HttpPost]
-        public async Task<ObjectResult> CreateCommand(CommandCreateDto commandCreateDto)
+        public async Task<ObjectResult> CreateCommandAsync(CommandCreateDto commandCreateDto)
         {
             var commandModel = _mapper.Map<Command>(commandCreateDto);
             await _commandsRepo.CreateCommandAsync(commandModel);
@@ -52,7 +52,7 @@ namespace Commander.Controllers
             
             try
             {
-                platformName = _platformsRepo.GetPlatformById(commandModel.PlatformId);
+                platformName = await _platformsRepo.GetPlatformByIdAsync(commandModel.PlatformId);
             }
             catch (Exception e)
             {
