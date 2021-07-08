@@ -23,10 +23,10 @@ namespace Commander.Controllers
             _commandsRepo = commandsRepo;
         }
         
-        [HttpGet(Name="GetAliasByCommandId")]
-        public ActionResult<AliasReadDto> GetAliasByCommandId(int id)
+        [HttpGet(Name="GetAliasByCommandIdAsync")]
+        public async Task<ActionResult<AliasReadDto>> GetAliasByCommandIdAsync(int id)
         {
-            var aliasItem = _aliasesRepo.GetAliasByCommandIdAsync(id);
+            var aliasItem = await _aliasesRepo.GetAliasByCommandIdAsync(id);
             var mappedAliasItem = _mapper.Map<AliasReadDto>(aliasItem);
 
             return aliasItem != null ? Ok(mappedAliasItem) : NotFound();
@@ -35,8 +35,8 @@ namespace Commander.Controllers
         [HttpPost]
         public async Task<ObjectResult> CreateAlias(Alias newAlias, int id)
         {
-            _aliasesRepo.CreateAliasAsync(newAlias);
-            _aliasesRepo.SaveChangesAsync();
+            await _aliasesRepo.CreateAliasAsync(newAlias);
+            await _aliasesRepo.SaveChangesAsync();
 
             var midAlias = _mapper.Map<AliasMidWay>(newAlias);
 
@@ -57,7 +57,7 @@ namespace Commander.Controllers
             var mappedAlias = _mapper.Map<AliasReadDto>(midAlias);
             
             return command.Line.Length > 0 
-                            ? CreatedAtRoute(nameof(GetAliasByCommandId), new { Id = command.Id}, mappedAlias)
+                            ? CreatedAtRoute(nameof(GetAliasByCommandIdAsync), new { Id = command.Id}, mappedAlias)
                             : Problem(statusCode: 405);
         }
     }
