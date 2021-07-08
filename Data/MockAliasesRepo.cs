@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Commander.Dtos;
 using Commander.Models;
 
@@ -5,23 +6,26 @@ namespace Commander.Data
 {
     public class MockAliasesRepo : IAliasesRepo
     {
-        public AliasMidWay GetAliasByCommandId(int id)
+        public async Task<AliasMidWay> GetAliasByCommandIdAsync(int id)
         {
-            return new AliasMidWay
+            var alias = new AliasMidWay
             {
                             Id = 1,
                             CommandAlias = "gs",
                             Command = "git status",
                             CommandId = 45
             };
+
+            return await Task.FromResult(alias);
         }
 
-        public void CreateAlias(Alias newAlias)
+        public Task CreateAliasAsync(Alias newAlias)
         {
             throw new System.NotImplementedException();
         }
 
-        public bool SaveChanges()
+
+        public Task<bool> SaveChangesAsync()
         {
             throw new System.NotImplementedException();
         }

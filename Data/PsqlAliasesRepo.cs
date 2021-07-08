@@ -1,7 +1,9 @@
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Commander.Dtos;
 using Commander.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Commander.Data
 {
@@ -14,35 +16,35 @@ namespace Commander.Data
             _context = context;
         }
 
-        public AliasMidWay GetAliasByCommandId(int id)
+        public async Task<AliasMidWay> GetAliasByCommandIdAsync(int id)
         {
-            return _context.Aliases.Join(_context.Commands, 
+            return await _context.Aliases.Join(_context.Commands, 
                             alias => alias.CommandId, 
                             command => command.Id, 
                             (alias, command) =>
-                            new AliasMidWay
-                            {
-                                            Id = alias.Id,
-                                            Command = command.Line,
-                                            CommandAlias = alias.CommandAlias,
-                                            CommandId = alias.CommandId
+                                            new AliasMidWay
+                                            {
+                                                            Id = alias.Id,
+                                                            Command = command.Line,
+                                                            CommandAlias = alias.CommandAlias,
+                                                            CommandId = alias.CommandId
                                             
-                            }).FirstOrDefault(p => p.CommandId == id);
+                                            }).FirstOrDefaultAsync(p => p.CommandId == id);
         }
 
-        public void CreateAlias(Alias newAlias)
+        public async Task CreateAliasAsync(Alias newAlias)
         {
             if (newAlias == null)
             {
                 throw new ArgumentNullException(nameof(newAlias));
             }
 
-            _context.Aliases.Add(newAlias);
+            await _context.Aliases.AddAsync(newAlias);
         }
 
-        public bool SaveChanges()
+        public async Task<bool> SaveChangesAsync()
         {
-            return (_context.SaveChanges() >= 0);
+            return await _context.SaveChangesAsync() >= 0;
         }
     }
 }
