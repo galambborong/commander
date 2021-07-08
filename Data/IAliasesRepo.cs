@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Commander.Dtos;
 using Commander.Models;
 
@@ -5,8 +6,8 @@ namespace Commander.Data
 {
     public interface IAliasesRepo
     {
-        AliasMidWay GetAliasByCommandId(int id);
-        void CreateAlias(Alias newAlias);
-        bool SaveChanges();
+        Task<AliasMidWay> GetAliasByCommandIdAsync(int id);
+        Task CreateAliasAsync(Alias newAlias);
+        Task<bool> SaveChangesAsync();
     }
 }
