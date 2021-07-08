@@ -26,7 +26,7 @@ namespace Commander.Controllers
         [HttpGet(Name="GetAliasByCommandId")]
         public ActionResult<AliasReadDto> GetAliasByCommandId(int id)
         {
-            var aliasItem = _aliasesRepo.GetAliasByCommandId(id);
+            var aliasItem = _aliasesRepo.GetAliasByCommandIdAsync(id);
             var mappedAliasItem = _mapper.Map<AliasReadDto>(aliasItem);
 
             return aliasItem != null ? Ok(mappedAliasItem) : NotFound();
@@ -35,8 +35,8 @@ namespace Commander.Controllers
         [HttpPost]
         public async Task<ObjectResult> CreateAlias(Alias newAlias, int id)
         {
-            _aliasesRepo.CreateAlias(newAlias);
-            _aliasesRepo.SaveChanges();
+            _aliasesRepo.CreateAliasAsync(newAlias);
+            _aliasesRepo.SaveChangesAsync();
 
             var midAlias = _mapper.Map<AliasMidWay>(newAlias);
 
