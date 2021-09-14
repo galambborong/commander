@@ -29,7 +29,7 @@ namespace Commander.Repositories
 
         public async Task CreatePlatformAsync(Platform newPlatform)
         {
-            if (newPlatform == null) 
+            if (newPlatform == null)
                 throw new ArgumentNullException(nameof(newPlatform));
 
             await _context.Platforms.AddAsync(newPlatform);
@@ -45,7 +45,7 @@ namespace Commander.Repositories
         public void DeletePlatform(Platform platform)
         {
             if (platform == null) throw new ArgumentNullException(nameof(platform));
-            
+
             _context.Platforms.Remove(platform);
         }
 

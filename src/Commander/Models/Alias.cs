@@ -5,16 +5,12 @@ namespace Commander.Models
 {
     public class Alias
     {
-        [Key] 
-        public int Id { get; set; }
-        
-        [Required] 
-        public string CommandAlias { get; set; }
+        [Key] public int Id { get; set; }
 
-        [Required] 
-        public int CommandId { get; set; }
-        
-        [ForeignKey("CommandId")] 
-        public Command Command { get; set; }
+        [Required] public string CommandAlias { get; set; }
+
+        [Required] public int CommandId { get; set; }
+
+        [ForeignKey("CommandId")] public Command Command { get; set; }
     }
 }

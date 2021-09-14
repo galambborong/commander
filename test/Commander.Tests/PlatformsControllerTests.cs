@@ -13,11 +13,10 @@ namespace Commander.Tests
         public void GetPlatformByIdAsync_NonexistantItem_ReturnsNotFound()
         {
             // Arrange
-            
-            
-            
+
+
             // Act
-            
+
             // Assert
         }
     }

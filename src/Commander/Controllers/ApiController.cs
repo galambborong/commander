@@ -13,7 +13,7 @@ namespace Commander.Controllers
         public IActionResult Index()
         {
             const string fileName = "endpoints.json";
- 
+
             // TODO Look into returning the file properly, so it as actual JSON
             return Ok(ReadAllText(fileName));
         }

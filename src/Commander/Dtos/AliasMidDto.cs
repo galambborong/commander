@@ -7,5 +7,4 @@ namespace Commander.Dtos
         public string Command { get; set; }
         public int CommandId { get; set; }
     }
-    
 }

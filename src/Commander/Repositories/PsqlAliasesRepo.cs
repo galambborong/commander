@@ -19,18 +19,17 @@ namespace Commander.Repositories
 
         public async Task<AliasMidWay> GetAliasByCommandIdAsync(int id)
         {
-            return await _context.Aliases.Join(_context.Commands, 
-                            alias => alias.CommandId, 
-                            command => command.Id, 
-                            (alias, command) =>
-                                            new AliasMidWay
-                                            {
-                                                            Id = alias.Id,
-                                                            Command = command.Line,
-                                                            CommandAlias = alias.CommandAlias,
-                                                            CommandId = alias.CommandId
-                                            
-                                            }).FirstOrDefaultAsync(p => p.CommandId == id);
+            return await _context.Aliases.Join(_context.Commands,
+                alias => alias.CommandId,
+                command => command.Id,
+                (alias, command) =>
+                    new AliasMidWay
+                    {
+                        Id = alias.Id,
+                        Command = command.Line,
+                        CommandAlias = alias.CommandAlias,
+                        CommandId = alias.CommandId
+                    }).FirstOrDefaultAsync(p => p.CommandId == id);
         }
 
         public async Task CreateAliasAsync(Alias newAlias)

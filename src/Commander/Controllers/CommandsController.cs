@@ -32,7 +32,7 @@ namespace Commander.Controllers
             return Ok(commandItems);
         }
 
-        [HttpGet("{id:int}", Name="GetCommandById")]
+        [HttpGet("{id:int}", Name = "GetCommandById")]
         public async Task<ActionResult<CommandReadDto>> GetCommandByIdAsync(int id)
         {
             var commandItem = await _commandsRepo.GetCommandByIdAsync(id);
@@ -50,7 +50,7 @@ namespace Commander.Controllers
             var newCommand = _mapper.Map<CommandReadDto>(commandModel);
 
             Platform platformName;
-            
+
             try
             {
                 platformName = await _platformsRepo.GetPlatformByIdAsync(commandModel.PlatformId);
@@ -60,12 +60,12 @@ namespace Commander.Controllers
                 Console.WriteLine(e.Message);
                 return Problem();
             }
-            
+
             newCommand.Platform = platformName.Name;
 
             return platformName.Name.Length > 0
-                            ? CreatedAtRoute(nameof(GetCommandByIdAsync), new {newCommand.Id}, newCommand)
-                            : Problem(statusCode: 405);
+                ? CreatedAtRoute(nameof(GetCommandByIdAsync), new {newCommand.Id}, newCommand)
+                : Problem(statusCode: 405);
         }
 
         [HttpDelete("{id:int}")]

@@ -26,32 +26,31 @@ namespace Commander.Repositories
         public IAsyncEnumerable<CommandReadDto> GetAllCommands()
         {
             return (_context.Commands.Join(_context.Platforms,
-                             command => command.PlatformId,
-                             platform => platform.Id,
-                             (command, platform) => new CommandReadDto 
-                             {
-                                             Id = command.Id,
-                                             HowTo = command.HowTo,
-                                             Line = command.Line,
-                                             Platform = platform.Name,
-                                             AdminPrivilegesRequired = command.AdminPrivilegesRequired
-                             })).AsAsyncEnumerable();
-             
+                command => command.PlatformId,
+                platform => platform.Id,
+                (command, platform) => new CommandReadDto
+                {
+                    Id = command.Id,
+                    HowTo = command.HowTo,
+                    Line = command.Line,
+                    Platform = platform.Name,
+                    AdminPrivilegesRequired = command.AdminPrivilegesRequired
+                })).AsAsyncEnumerable();
         }
 
         public async Task<CommandReadDto> GetCommandByIdAsync(int id)
         {
             return await _context.Commands.Join(_context.Platforms,
-                            command => command.PlatformId,
-                            platform => platform.Id,
-                            (command, platform) => new CommandReadDto
-                            {
-                                            Id = command.Id,
-                                            HowTo = command.HowTo,
-                                            Line = command.Line,
-                                            Platform = platform.Name,
-                                            AdminPrivilegesRequired = command.AdminPrivilegesRequired
-                            }).FirstOrDefaultAsync(p => p.Id == id);
+                command => command.PlatformId,
+                platform => platform.Id,
+                (command, platform) => new CommandReadDto
+                {
+                    Id = command.Id,
+                    HowTo = command.HowTo,
+                    Line = command.Line,
+                    Platform = platform.Name,
+                    AdminPrivilegesRequired = command.AdminPrivilegesRequired
+                }).FirstOrDefaultAsync(p => p.Id == id);
         }
 
         public async Task<Command> GetDbCommandByIdAsync(int id)
@@ -80,6 +79,7 @@ namespace Commander.Repositories
             {
                 throw new ArgumentNullException(nameof(cmd));
             }
+
             _context.Commands.Remove(cmd);
         }
     }

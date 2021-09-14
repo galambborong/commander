@@ -25,18 +25,16 @@ namespace Commander
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<CommanderContext>(opt => opt.UseNpgsql(Configuration.GetConnectionString("CommanderConnection")));
+            services.AddDbContext<CommanderContext>(opt =>
+                opt.UseNpgsql(Configuration.GetConnectionString("CommanderConnection")));
 
             services.AddControllers()
-                            .AddNewtonsoftJson(s =>
-                                            s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver());
+                .AddNewtonsoftJson(s =>
+                    s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver());
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-            
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo {Title = "Commander", Version = "v1"});
-            });
+
+            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "Commander", Version = "v1"}); });
 
             services.AddScoped<ICommandsRepo, PsqlCommandsRepo>();
             services.AddScoped<IPlatformsRepo, PsqlPlatformsRepo>();
@@ -55,7 +53,7 @@ namespace Commander
 
             app.UseExceptionHandler("/error");
             app.UseStatusCodePages(
-                            "application/json; charset=utf-8", "Status code: {0}");
+                "application/json; charset=utf-8", "Status code: {0}");
 
             app.UseHttpsRedirection();
 
@@ -63,10 +61,7 @@ namespace Commander
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }

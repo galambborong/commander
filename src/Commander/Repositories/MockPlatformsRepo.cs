@@ -11,10 +11,10 @@ namespace Commander.Repositories
         {
             return new List<Platform>
             {
-                            new Platform {Id = 1, Name = "Linux"},
-                            new Platform {Id = 2, Name = "Dotnet"},
-                            new Platform {Id = 3, Name = "Pacman"},
-                            new Platform {Id = 4, Name = "Git"}
+                new Platform {Id = 1, Name = "Linux"},
+                new Platform {Id = 2, Name = "Dotnet"},
+                new Platform {Id = 3, Name = "Pacman"},
+                new Platform {Id = 4, Name = "Git"}
             };
         }
 

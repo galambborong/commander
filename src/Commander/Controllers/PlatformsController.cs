@@ -26,11 +26,11 @@ namespace Commander.Controllers
         public ActionResult<IEnumerable<Platform>> GetAllPlatforms()
         {
             var platformItems = _repository.GetAllPlatforms();
-            
+
             return Ok(platformItems);
         }
 
-        [HttpGet("{id:int}", Name="GetPlatformByIdAsync")]
+        [HttpGet("{id:int}", Name = "GetPlatformByIdAsync")]
         public async Task<ActionResult<Platform>> GetPlatformByIdAsync(int id)
         {
             Console.WriteLine($"{id}<<");
@@ -52,11 +52,11 @@ namespace Commander.Controllers
         {
             var platformFromRepo = await _repository.GetPlatformByIdAsync(id);
             if (platformFromRepo == null) return NotFound();
-            
+
             patchedPlatform.ApplyTo(platformFromRepo, ModelState);
 
             if (!TryValidateModel(platformFromRepo)) return ValidationProblem(ModelState);
-            
+
             await _repository.UpdatePlatformAsync(platformFromRepo);
             await _repository.SaveChangesAsync();
 

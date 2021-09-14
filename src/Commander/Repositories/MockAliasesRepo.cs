@@ -10,10 +10,10 @@ namespace Commander.Repositories
         {
             var alias = new AliasMidWay
             {
-                            Id = 1,
-                            CommandAlias = "gs",
-                            Command = "git status",
-                            CommandId = 45
+                Id = 1,
+                CommandAlias = "gs",
+                Command = "git status",
+                CommandId = 45
             };
 
             return await Task.FromResult(alias);

@@ -20,22 +20,23 @@ namespace Commander.Repositories
 
         public IAsyncEnumerable<CommandReadDto> GetAllCommands()
         {
-        //     var commands = new List<CommandReadDto>
-        //     {
-        //         new CommandReadDto {Id = 0, HowTo = "Add DB migrations", Line = "dotnet ef migrations add <NAME>", Platform = "Entity"},
-        //         new CommandReadDto {Id = 1, HowTo = "Switch branch", Line = "git checkout <BRANCH>", Platform = "Git"},
-        //         new CommandReadDto {Id = 2, HowTo = "Update AUR packages", Line = "paru -Sua", Platform ="AUR", AdminPrivilegesRequired = true},
-        //     };
+            //     var commands = new List<CommandReadDto>
+            //     {
+            //         new CommandReadDto {Id = 0, HowTo = "Add DB migrations", Line = "dotnet ef migrations add <NAME>", Platform = "Entity"},
+            //         new CommandReadDto {Id = 1, HowTo = "Switch branch", Line = "git checkout <BRANCH>", Platform = "Git"},
+            //         new CommandReadDto {Id = 2, HowTo = "Update AUR packages", Line = "paru -Sua", Platform ="AUR", AdminPrivilegesRequired = true},
+            //     };
 
 
-        throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public async Task<CommandReadDto> GetCommandByIdAsync(int id)
         {
             var command = new CommandReadDto
             {
-                            Id = 2, HowTo = "Update AUR packages", Line = "paru -Sua", Platform = "AUR", AdminPrivilegesRequired = true
+                Id = 2, HowTo = "Update AUR packages", Line = "paru -Sua", Platform = "AUR",
+                AdminPrivilegesRequired = true
             };
 
             return await Task.FromResult(command);
@@ -43,7 +44,11 @@ namespace Commander.Repositories
 
         public async Task<Command> GetDbCommandByIdAsync(int id)
         {
-            var commands = new Command {Id = 2, HowTo = "Update AUR packages", Line = "paru -Sua", PlatformId = 5, AdminPrivilegesRequired = true};
+            var commands = new Command
+            {
+                Id = 2, HowTo = "Update AUR packages", Line = "paru -Sua", PlatformId = 5,
+                AdminPrivilegesRequired = true
+            };
             return await Task.FromResult(commands);
         }
 

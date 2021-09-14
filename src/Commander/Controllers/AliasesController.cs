@@ -23,8 +23,8 @@ namespace Commander.Controllers
             _aliasesRepo = aliasesRepo;
             _commandsRepo = commandsRepo;
         }
-        
-        [HttpGet(Name="GetAliasByCommandIdAsync")]
+
+        [HttpGet(Name = "GetAliasByCommandIdAsync")]
         public async Task<ActionResult<AliasReadDto>> GetAliasByCommandIdAsync(int id)
         {
             var aliasItem = await _aliasesRepo.GetAliasByCommandIdAsync(id);
@@ -56,10 +56,10 @@ namespace Commander.Controllers
             midAlias.Command = command.Line;
 
             var mappedAlias = _mapper.Map<AliasReadDto>(midAlias);
-            
-            return command.Line.Length > 0 
-                            ? CreatedAtRoute(nameof(GetAliasByCommandIdAsync), new { Id = command.Id}, mappedAlias)
-                            : Problem(statusCode: 405);
+
+            return command.Line.Length > 0
+                ? CreatedAtRoute(nameof(GetAliasByCommandIdAsync), new {Id = command.Id}, mappedAlias)
+                : Problem(statusCode: 405);
         }
     }
 }
