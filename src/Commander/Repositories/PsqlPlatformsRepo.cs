@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Commander.Data;
 using Commander.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Commander.Data
+namespace Commander.Repositories
 {
     public class PsqlPlatformsRepo : IPlatformsRepo
     {
@@ -28,12 +29,15 @@ namespace Commander.Data
 
         public async Task CreatePlatformAsync(Platform newPlatform)
         {
-            if (newPlatform == null) throw new ArgumentNullException(nameof(newPlatform));
+            if (newPlatform == null) 
+                throw new ArgumentNullException(nameof(newPlatform));
 
             await _context.Platforms.AddAsync(newPlatform);
         }
 
+#pragma warning disable 1998
         public async Task UpdatePlatformAsync(Platform platform)
+#pragma warning restore 1998
         {
             // do nothing
         }

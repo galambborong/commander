@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Commander.Dtos;
 using Commander.Models;
-using Microsoft.EntityFrameworkCore.Query.Internal;
 
-namespace Commander.Data
+namespace Commander.Repositories
 {
     public class MockCommandsRepo : ICommandsRepo
     {
@@ -48,7 +47,9 @@ namespace Commander.Data
             return await Task.FromResult(commands);
         }
 
+#pragma warning disable 1998
         public async Task CreateCommandAsync(Command cmd)
+#pragma warning restore 1998
         {
             throw new NotImplementedException();
         }

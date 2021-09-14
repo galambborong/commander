@@ -1,11 +1,12 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Commander.Data;
 using Commander.Dtos;
 using Commander.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Commander.Data
+namespace Commander.Repositories
 {
     public class PsqlAliasesRepo : IAliasesRepo
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Commander.Models;
 
-namespace Commander.Data
+namespace Commander.Repositories
 {
     public class MockPlatformsRepo : IPlatformsRepo
     {
