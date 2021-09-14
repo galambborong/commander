@@ -1,4 +1,5 @@
-using System;
+using Commander.Repositories;
+using Moq;
 using Xunit;
 
 namespace Commander.Tests
@@ -7,12 +8,13 @@ namespace Commander.Tests
     {
         [Fact]
         // Naming convention for tests:
-        // UnitOfWork
-        // StateUnderTest
-        // ExpectedBehaviour
+            // UnitOfWork
+            // StateUnderTest
+            // ExpectedBehaviour
         public void GetPlatformByIdAsync_NonexistantItem_ReturnsNotFound()
         {
             // Arrange
+            var repositoryStub = new Mock<IPlatformsRepo>();
 
 
             // Act
