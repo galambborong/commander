@@ -1,4 +1,9 @@
+using System;
+using System.Threading.Tasks;
+using Commander.Controllers;
+using Commander.Models;
 using Commander.Repositories;
+using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Xunit;
 
@@ -11,15 +16,20 @@ namespace Commander.Tests
             // UnitOfWork
             // StateUnderTest
             // ExpectedBehaviour
-        public void GetPlatformByIdAsync_NonexistantItem_ReturnsNotFound()
+        public async Task GetPlatformByIdAsync_NonexistantItem_ReturnsNotFound()
         {
             // Arrange
             var repositoryStub = new Mock<IPlatformsRepo>();
 
+            repositoryStub.Setup(repo => repo.GetPlatformByIdAsync(It.IsAny<Int16>())).ReturnsAsync((Platform)null);
+
+            var controller = new PlatformsController(repositoryStub.Object);
 
             // Act
+            var result = await controller.GetPlatformByIdAsync(1);
 
             // Assert
+            Assert.IsType<NotFoundResult>(result.Result);
         }
     }
 }
