@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Commander.Data;
 using Commander.Models;
@@ -30,13 +31,13 @@ namespace Commander.Controllers
             return Ok(platformItems);
         }
 
-        [HttpGet("{id:int}", Name = "GetPlatformByIdAsync")]
-        public async Task<ActionResult<Platform>> GetPlatformByIdAsync(int id)
+        [HttpGet("{id}", Name = "GetPlatformByIdAsync")]
+        public async Task<ActionResult<Platform>> GetPlatformByIdAsync(dynamic id) => id switch
         {
-            Console.WriteLine($"{id}<<");
-            var platformItem = await _repository.GetPlatformByIdAsync(id);
-            return platformItem != null ? Ok(platformItem) : NotFound();
-        }
+            > 0 => await _GetPlatformByIdAsync(id),
+            _ => BadRequest()
+        };
+        
 
         [HttpPost]
         public async Task<ActionResult<Platform>> CreatePlatformAsync(Platform newPlatform)
@@ -51,16 +52,24 @@ namespace Commander.Controllers
         public async Task<ActionResult> PatchPlatform(int id, JsonPatchDocument<Platform> patchedPlatform)
         {
             var platformFromRepo = await _repository.GetPlatformByIdAsync(id);
-            if (platformFromRepo == null) return NotFound();
+            if (platformFromRepo == null)
+                return NotFound();
 
             patchedPlatform.ApplyTo(platformFromRepo, ModelState);
 
-            if (!TryValidateModel(platformFromRepo)) return ValidationProblem(ModelState);
+            if (!TryValidateModel(platformFromRepo))
+                return ValidationProblem(ModelState);
 
             await _repository.UpdatePlatformAsync(platformFromRepo);
             await _repository.SaveChangesAsync();
 
             return NoContent();
+        }
+        private async Task<ActionResult<Platform>> _GetPlatformByIdAsync(int id)
+        {
+            var platformItem = await _repository.GetPlatformByIdAsync(id);
+
+            return platformItem is not null ? Ok(platformItem) : NotFound();
         }
     }
 }

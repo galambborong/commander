@@ -34,8 +34,6 @@ namespace Commander
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "Commander", Version = "v1"}); });
-
             services.AddScoped<ICommandsRepo, PsqlCommandsRepo>();
             services.AddScoped<IPlatformsRepo, PsqlPlatformsRepo>();
             services.AddScoped<IAliasesRepo, PsqlAliasesRepo>();
@@ -47,13 +45,9 @@ namespace Commander
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Commander v1"));
             }
 
             app.UseExceptionHandler("/error");
-            app.UseStatusCodePages(
-                "application/json; charset=utf-8", "Status code: {0}");
 
             app.UseHttpsRedirection();
 

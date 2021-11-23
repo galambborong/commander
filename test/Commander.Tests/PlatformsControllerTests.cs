@@ -6,6 +6,7 @@ using Commander.Models;
 using Commander.Repositories;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Moq;
 using Xunit;
 
@@ -15,7 +16,7 @@ namespace Commander.Tests
     {
         private readonly Mock<IPlatformsRepo> _repositoryStub = new();
         private readonly Random _random = new();
-        
+
         [Fact]
         // Naming convention for tests: UnitOfWork_StateUnderTest_ExpectedBehaviour
         public async Task GetPlatformByIdAsync_NonexistentItem_ReturnsNotFound()
@@ -31,21 +32,22 @@ namespace Commander.Tests
             // Assert
             Assert.IsType<NotFoundResult>(result.Result);
         }
-        // public async Task GetPlatformByIdAsync_IncorrectType_BadRequest()
-        // {
-        //     // Arrange
-        //     var repositoryStub = new Mock<IPlatformsRepo>();
-        //
-        //     repositoryStub.Setup(repo => repo.GetPlatformByIdAsync(It.IsAny<string>())).ReturnsAsync((Platform)null);
-        //
-        //     var controller = new PlatformsController(repositoryStub.Object);
-        //
-        //     // Act
-        //     var result = await controller.GetPlatformByIdAsync("hello");
-        //
-        //     // Assert
-        //     Assert.IsType<BadRequestResult>(result.Result);
-        // }
+
+        [Fact]
+        public async Task GetPlatformByIdAsync_IncorrectType_BadRequest()
+        {
+            // Arrange
+            _repositoryStub.Setup(repo => repo.GetPlatformByIdAsync(1)).ReturnsAsync((Platform)null);
+
+            var controller = new PlatformsController(_repositoryStub.Object);
+
+            // Act
+            var result = await controller.GetPlatformByIdAsync("1");
+            controller.ModelState.AddModelError("mock", "failed");
+
+            // Assert
+            result.Result.Should().BeOfType<BadRequestResult>();
+        }
 
         [Fact]
         public async Task GetPlatformByIdAsync_WithExistingItem_ReturnExpectedItem()
@@ -60,7 +62,7 @@ namespace Commander.Tests
             var result = await controller.GetPlatformByIdAsync(999);
 
             // Assert
-            result.Result.Should().BeEquivalentTo(expectedItem);
+            result.Result.Should().BeOfType<OkObjectResult>();
         }
 
         private static Platform CreateRandomPlatform()
