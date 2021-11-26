@@ -34,10 +34,10 @@ namespace Commander.Controllers
         [HttpGet("{id}", Name = "GetPlatformByIdAsync")]
         public async Task<ActionResult<Platform>> GetPlatformByIdAsync(dynamic id) => id switch
         {
-            > 0 => await _GetPlatformByIdAsync(id),
-            _ => BadRequest()
+                        > 0 => await _GetPlatformByIdAsync(id),
+                        _ => BadRequest()
         };
-        
+
 
         [HttpPost]
         public async Task<ActionResult<Platform>> CreatePlatformAsync(Platform newPlatform)
@@ -45,7 +45,7 @@ namespace Commander.Controllers
             await _repository.CreatePlatformAsync(newPlatform);
             await _repository.SaveChangesAsync();
 
-            return CreatedAtRoute(nameof(GetPlatformByIdAsync), new {newPlatform.Id}, newPlatform);
+            return CreatedAtRoute(nameof(GetPlatformByIdAsync), new { newPlatform.Id }, newPlatform);
         }
 
         [HttpPatch("{id:int}")]
@@ -65,6 +65,7 @@ namespace Commander.Controllers
 
             return NoContent();
         }
+
         private async Task<ActionResult<Platform>> _GetPlatformByIdAsync(int id)
         {
             var platformItem = await _repository.GetPlatformByIdAsync(id);
