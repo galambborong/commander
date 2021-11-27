@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Commander.Dtos;
 using Commander.Models;
@@ -6,14 +7,14 @@ namespace Commander.Repositories
 {
     public class MockAliasesRepo : IAliasesRepo
     {
-        public async Task<AliasMidWay> GetAliasByCommandIdAsync(int id)
+        public async Task<AliasMidWay> GetAliasByCommandIdAsync(Guid id)
         {
             var alias = new AliasMidWay
             {
-                Id = 1,
+                Id = Guid.NewGuid(),
                 CommandAlias = "gs",
                 Command = "git status",
-                CommandId = 45
+                CommandId = Guid.NewGuid()
             };
 
             return await Task.FromResult(alias);

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Commander.Controllers
 {
-    [Route("/api/commands/{id:int}/alias")]
+    [Route("/api/commands/{id:guid}/alias")]
     [ApiController]
     public class AliasesController : ControllerBase
     {
@@ -25,7 +25,7 @@ namespace Commander.Controllers
         }
 
         [HttpGet(Name = "GetAliasByCommandIdAsync")]
-        public async Task<ActionResult<AliasReadDto>> GetAliasByCommandIdAsync(int id)
+        public async Task<ActionResult<AliasReadDto>> GetAliasByCommandIdAsync(Guid id)
         {
             var aliasItem = await _aliasesRepo.GetAliasByCommandIdAsync(id);
             var mappedAliasItem = _mapper.Map<AliasReadDto>(aliasItem);
@@ -34,7 +34,7 @@ namespace Commander.Controllers
         }
 
         [HttpPost]
-        public async Task<ObjectResult> CreateAlias(Alias newAlias, int id)
+        public async Task<ObjectResult> CreateAlias(Alias newAlias, Guid id)
         {
             await _aliasesRepo.CreateAliasAsync(newAlias);
             await _aliasesRepo.SaveChangesAsync();

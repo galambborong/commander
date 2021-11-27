@@ -32,8 +32,8 @@ namespace Commander.Controllers
             return Ok(commandItems);
         }
 
-        [HttpGet("{id:int}", Name = "GetCommandById")]
-        public async Task<ActionResult<CommandReadDto>> GetCommandByIdAsync(int id)
+        [HttpGet("{id:guid}", Name = "GetCommandById")]
+        public async Task<ActionResult<CommandReadDto>> GetCommandByIdAsync(Guid id)
         {
             var commandItem = await _commandsRepo.GetCommandByIdAsync(id);
 
@@ -68,8 +68,8 @@ namespace Commander.Controllers
                 : Problem(statusCode: 405);
         }
 
-        [HttpDelete("{id:int}")]
-        public async Task<ActionResult> DeleteCommand(int id)
+        [HttpDelete("{id:guid}")]
+        public async Task<ActionResult> DeleteCommand(Guid id)
         {
             var commandModelFromRepoAsync = await _commandsRepo.GetDbCommandByIdAsync(id);
 

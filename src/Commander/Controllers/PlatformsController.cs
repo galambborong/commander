@@ -48,8 +48,8 @@ namespace Commander.Controllers
             return CreatedAtRoute(nameof(GetPlatformByIdAsync), new { newPlatform.Id }, newPlatform);
         }
 
-        [HttpPatch("{id:int}")]
-        public async Task<ActionResult> PatchPlatform(int id, JsonPatchDocument<Platform> patchedPlatform)
+        [HttpPatch("{id:guid}")]
+        public async Task<ActionResult> PatchPlatform(Guid id, JsonPatchDocument<Platform> patchedPlatform)
         {
             var platformFromRepo = await _repository.GetPlatformByIdAsync(id);
             if (platformFromRepo == null)
@@ -66,7 +66,7 @@ namespace Commander.Controllers
             return NoContent();
         }
 
-        private async Task<ActionResult<Platform>> _GetPlatformByIdAsync(int id)
+        private async Task<ActionResult<Platform>> _GetPlatformByIdAsync(Guid id)
         {
             var platformItem = await _repository.GetPlatformByIdAsync(id);
 

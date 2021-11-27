@@ -11,16 +11,16 @@ namespace Commander.Repositories
         {
             return new List<Platform>
             {
-                new Platform {Id = 1, Name = "Linux"},
-                new Platform {Id = 2, Name = "Dotnet"},
-                new Platform {Id = 3, Name = "Pacman"},
-                new Platform {Id = 4, Name = "Git"}
+                new Platform {Id = Guid.NewGuid(), Name = "Linux"},
+                new Platform {Id = Guid.NewGuid(), Name = "Dotnet"},
+                new Platform {Id = Guid.NewGuid(), Name = "Pacman"},
+                new Platform {Id = Guid.NewGuid(), Name = "Git"}
             };
         }
 
-        public Task<Platform> GetPlatformByIdAsync(int id)
+        public Task<Platform> GetPlatformByIdAsync(Guid id)
         {
-            var platform = new Platform {Id = 4, Name = "Git"};
+            var platform = new Platform {Id = Guid.NewGuid(), Name = "Git"};
             return Task.FromResult(platform);
         }
 

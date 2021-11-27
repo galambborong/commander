@@ -22,7 +22,7 @@ namespace Commander.Repositories
             return _context.Platforms.ToList();
         }
 
-        public async Task<Platform> GetPlatformByIdAsync(int id)
+        public async Task<Platform> GetPlatformByIdAsync(Guid id)
         {
             return await _context.Platforms.FirstOrDefaultAsync(p => p.Id == id);
         }
