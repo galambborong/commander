@@ -18,7 +18,7 @@ namespace Commander.Dtos
         public bool AdminPrivilegesRequired { get; set; }
 
         [Required]
-        public Guid PlatformId { get; set; }
+        public int PlatformId { get; set; }
 
         [ForeignKey("PlatformId")]
         public Platform Platform { get; set; }

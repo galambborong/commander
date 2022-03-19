@@ -22,7 +22,7 @@ namespace Commander.Tests
         public async Task GetPlatformByIdAsync_NonexistentItem_ReturnsNotFound()
         {
             // Arrange
-            _repositoryStub.Setup(repo => repo.GetPlatformByIdAsync(Guid.NewGuid())).ReturnsAsync((Platform)null);
+            _repositoryStub.Setup(repo => repo.GetPlatformByIdAsync(999)).ReturnsAsync((Platform)null);
 
             var controller = new PlatformsController(_repositoryStub.Object);
 
@@ -37,7 +37,7 @@ namespace Commander.Tests
         public async Task GetPlatformByIdAsync_IncorrectType_BadRequest()
         {
             // Arrange
-            _repositoryStub.Setup(repo => repo.GetPlatformByIdAsync(Guid.NewGuid())).ReturnsAsync((Platform)null);
+            _repositoryStub.Setup(repo => repo.GetPlatformByIdAsync(999)).ReturnsAsync((Platform)null);
 
             var controller = new PlatformsController(_repositoryStub.Object);
 
@@ -54,7 +54,7 @@ namespace Commander.Tests
         {
             // Arrange
             var expectedItem = CreateRandomPlatform();
-            _repositoryStub.Setup(repo => repo.GetPlatformByIdAsync(Guid.NewGuid())).ReturnsAsync(expectedItem);
+            _repositoryStub.Setup(repo => repo.GetPlatformByIdAsync(999)).ReturnsAsync(expectedItem);
 
             var controller = new PlatformsController(_repositoryStub.Object);
 
@@ -69,7 +69,7 @@ namespace Commander.Tests
         {
             return new Platform
             {
-                Id = Guid.NewGuid(),
+                Id = 999,
                 Name = "A new framework"
             };
         }

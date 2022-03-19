@@ -8,7 +8,7 @@ namespace Commander.Repositories
     public interface IPlatformsRepo
     {
         IEnumerable<Platform> GetAllPlatforms();
-        Task<Platform> GetPlatformByIdAsync(Guid id);
+        Task<Platform> GetPlatformByIdAsync(int id);
         Task CreatePlatformAsync(Platform platform);
         Task UpdatePlatformAsync(Platform platform);
         void DeletePlatform(Platform platform);

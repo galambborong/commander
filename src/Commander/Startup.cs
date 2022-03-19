@@ -34,7 +34,7 @@ namespace Commander
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            services.AddScoped<ICommandsRepo, MockCommandsRepo>();
+            services.AddScoped<ICommandsRepo, PsqlCommandsRepo>();
             services.AddScoped<IPlatformsRepo, PsqlPlatformsRepo>();
             services.AddScoped<IAliasesRepo, PsqlAliasesRepo>();
         }

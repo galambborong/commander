@@ -11,8 +11,8 @@ namespace Commander.Repositories
     {
         Task<bool> SaveChangesAsync();
         IAsyncEnumerable<CommandReadDto> GetAllCommands();
-        Task<CommandReadDto> GetCommandByIdAsync(Guid id);
-        Task<Command> GetDbCommandByIdAsync(Guid id);
+        Task<CommandReadDto> GetCommandByIdAsync(int id);
+        Task<Command> GetDbCommandByIdAsync(int id);
 
         Task CreateCommandAsync(Command cmd);
         void UpdateCommand(Command cmd);

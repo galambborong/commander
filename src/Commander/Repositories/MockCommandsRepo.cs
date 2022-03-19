@@ -31,22 +31,22 @@ namespace Commander.Repositories
             throw new NotImplementedException();
         }
 
-        public async Task<CommandReadDto> GetCommandByIdAsync(Guid id)
+        public async Task<CommandReadDto> GetCommandByIdAsync(int id)
         {
             var command = new CommandReadDto
             {
-                Id = Guid.NewGuid(), HowTo = "Update AUR packages", Line = "paru -Sua", Platform = "AUR",
+                Id = 99, HowTo = "Update AUR packages", Line = "paru -Sua", Platform = "AUR",
                 AdminPrivilegesRequired = true
             };
 
             return await Task.FromResult(command);
         }
 
-        public async Task<Command> GetDbCommandByIdAsync(Guid id)
+        public async Task<Command> GetDbCommandByIdAsync(int id)
         {
             var commands = new Command
             {
-                Id = Guid.NewGuid(), HowTo = "Update AUR packages", Line = "paru -Sua", PlatformId = Guid.NewGuid(),
+                Id = 99, HowTo = "Update AUR packages", Line = "paru -Sua", PlatformId = 999,
                 AdminPrivilegesRequired = true
             };
             return await Task.FromResult(commands);

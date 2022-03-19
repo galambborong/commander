@@ -17,7 +17,7 @@ namespace Commander.Repositories
             _context = context;
         }
 
-        public async Task<AliasMidWay> GetAliasByCommandIdAsync(Guid id)
+        public async Task<AliasMidWay> GetAliasByCommandIdAsync(int id)
         {
             return await _context.Aliases.Join(_context.Commands,
                 alias => alias.CommandId,

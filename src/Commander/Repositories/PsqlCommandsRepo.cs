@@ -38,7 +38,7 @@ namespace Commander.Repositories
                 })).AsAsyncEnumerable();
         }
 
-        public async Task<CommandReadDto> GetCommandByIdAsync(Guid id)
+        public async Task<CommandReadDto> GetCommandByIdAsync(int id)
         {
             return await _context.Commands.Join(_context.Platforms,
                 command => command.PlatformId,
@@ -53,7 +53,7 @@ namespace Commander.Repositories
                 }).FirstOrDefaultAsync(p => p.Id == id);
         }
 
-        public async Task<Command> GetDbCommandByIdAsync(Guid id)
+        public async Task<Command> GetDbCommandByIdAsync(int id)
         {
             return await _context.Commands.FirstOrDefaultAsync((p => p.Id == id));
         }

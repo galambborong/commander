@@ -7,7 +7,7 @@ namespace Commander.Repositories
 {
     public interface IAliasesRepo
     {
-        Task<AliasMidWay> GetAliasByCommandIdAsync(Guid id);
+        Task<AliasMidWay> GetAliasByCommandIdAsync(int id);
         Task CreateAliasAsync(Alias newAlias);
         Task<bool> SaveChangesAsync();
     }

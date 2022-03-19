@@ -7,13 +7,13 @@ namespace Commander.Models
     public class Alias
     {
         [Key]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         public string CommandAlias { get; set; }
 
         [Required]
-        public Guid CommandId { get; set; }
+        public int CommandId { get; set; }
 
         [ForeignKey("CommandId")]
         public Command Command { get; set; }

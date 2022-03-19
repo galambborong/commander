@@ -7,7 +7,7 @@ namespace Commander.Models
     public class Command
     {
         [Key]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [MaxLength(250)]
@@ -20,7 +20,7 @@ namespace Commander.Models
         public bool AdminPrivilegesRequired { get; set; }
 
         [Required]
-        public Guid PlatformId { get; set; }
+        public int PlatformId { get; set; }
 
         [ForeignKey("PlatformId")]
         public Platform Platform { get; set; }

@@ -7,14 +7,14 @@ namespace Commander.Repositories
 {
     public class MockAliasesRepo : IAliasesRepo
     {
-        public async Task<AliasMidWay> GetAliasByCommandIdAsync(Guid id)
+        public async Task<AliasMidWay> GetAliasByCommandIdAsync(int id)
         {
             var alias = new AliasMidWay
             {
-                Id = Guid.NewGuid(),
+                Id = id,
                 CommandAlias = "gs",
                 Command = "git status",
-                CommandId = Guid.NewGuid()
+                CommandId = 11
             };
 
             return await Task.FromResult(alias);
