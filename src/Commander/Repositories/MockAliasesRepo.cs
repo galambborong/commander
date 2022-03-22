@@ -22,13 +22,13 @@ namespace Commander.Repositories
 
         public Task CreateAliasAsync(Alias newAlias)
         {
-            throw new System.NotImplementedException();
+           throw new NotImplementedException();
         }
 
 
         public Task<bool> SaveChangesAsync()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }
