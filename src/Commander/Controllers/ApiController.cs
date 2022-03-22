@@ -1,21 +1,30 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Routing.Matching;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using static System.IO.File;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 
-namespace Commander.Controllers
+namespace Commander.Controllers;
+
+[Route("/api")]
+[ApiController]
+public class ApiController : Controller
 {
-    [Route("/api")]
-    [ApiController]
-    public class ApiController : Controller
-    {
-        public IActionResult Index()
-        {
-            const string fileName = "endpoints.json";
+    private readonly ILogger _logger;
 
-            // TODO Look into returning the file properly, so it as actual JSON
-            return Ok(ReadAllText(fileName));
-        }
+    public ApiController(ILogger<ApiController> logger)
+    {
+        _logger = logger;
+    }
+    public IActionResult Index()
+    {
+        const string fileName = "endpoints.json";
+
+        var buffer = ReadAllText(fileName);
+        
+        _logger.LogInformation($"Buffer is: {buffer}");
+
+        var jsonContents = JsonConvert.DeserializeObject(buffer);
+
+        return Ok(jsonContents);
     }
 }
