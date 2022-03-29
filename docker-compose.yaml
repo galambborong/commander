@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+  postgresql_database:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=passwd
+      - POSTGRES_DB=Commander
+    ports:
+      - "9999:5432"
+    restart: unless-stopped
+    volumes:
+      - database-data:/var/lib/postgresql/data/
+    
+  commander_api:
+    image: galambborong/commander:0.6
+    ports:
+      - "8080:80"
+    environment: 
+      - Logging__Console__FormatterName=""
+    restart: unless-stopped
+
+volumes:
+  database-data:

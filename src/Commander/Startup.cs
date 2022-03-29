@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
 using Commander.Data;
 using Commander.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -26,7 +25,7 @@ namespace Commander
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<CommanderContext>(opt =>
-                opt.UseNpgsql(Configuration.GetConnectionString("CommanderConnection")));
+                opt.UseNpgsql(Configuration.GetConnectionString("TestDockerConnection")));
 
             services.AddControllers()
                 .AddNewtonsoftJson(s =>
