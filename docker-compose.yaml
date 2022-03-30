@@ -1,5 +1,9 @@
 version: '3.4'
 
+networks:
+  commander-api-dev:
+    driver: bridge
+
 services:
   postgresql_database:
     image: postgres:latest
