@@ -22,12 +22,17 @@ services:
   commander_api:
     depends_on:
       - postgresql_database
-    image: galambborong/commander:0.7
+    image: galambborong/commander:0.9
     ports:
       - "8080:80"
     environment: 
       - Logging__Console__FormatterName=""
-      - DB_CONNECTION_STRING="host=postgresql_database;port=9999;database=Commander;username=postgres;password=passwd;"
+      - DB_CONNECTION_STRING="User ID = postgres;Password=passwd;Host=host.docker.internal;Port=9999;Database=Commander;Integrated Security=true;Pooling=true"
+#      - "User ID=postgres;Password=passwd;Host=postgresql_database;Port=9999;Database=Commander;Pooling=true"
+#      - DB_CONNECTION_STRING="User ID=postgres;Password=passwd;Host=postgresql_database;Port=9999;Database=Commander;Pooling=true"
+#      - User ID = user;Password=pass;Server=postgres;Port=5432;Database=testdb;Integrated Security=true;Pooling=true
+    
+    #User ID=postgres;Password=passwd;Host=postgresql_database;Port=9999;Database=Commander;Pooling=true;
     networks:
       - commander-api-dev
     restart: unless-stopped
