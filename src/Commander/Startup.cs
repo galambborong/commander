@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Commander.Data;
+using Commander.Models;
 using Commander.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Serialization;
@@ -48,6 +49,8 @@ namespace Commander
             {
                 app.UseDeveloperExceptionPage();
             }
+            
+            PrepDB.PrepPopulation(app);
 
             app.UseExceptionHandler("/error");
 
