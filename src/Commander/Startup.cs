@@ -25,7 +25,7 @@ namespace Commander
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connectionString = Configuration.GetConnectionString("TestDockerConnection");
+            var connectionString = Configuration["DB_CONNECTION_STRING"];
             Console.WriteLine(connectionString);
             services.AddDbContext<CommanderContext>(opt =>
                 // opt.UseNpgsql(Configuration.GetConnectionString("TestDockerConnection"))

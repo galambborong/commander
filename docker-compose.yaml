@@ -27,15 +27,19 @@ services:
       - "8080:80"
     environment: 
       - Logging__Console__FormatterName=""
-      - DB_CONNECTION_STRING="User ID = postgres;Password=passwd;Host=host.docker.internal;Port=9999;Database=Commander;Integrated Security=true;Pooling=true"
-#      - "User ID=postgres;Password=passwd;Host=postgresql_database;Port=9999;Database=Commander;Pooling=true"
-#      - DB_CONNECTION_STRING="User ID=postgres;Password=passwd;Host=postgresql_database;Port=9999;Database=Commander;Pooling=true"
-#      - User ID = user;Password=pass;Server=postgres;Port=5432;Database=testdb;Integrated Security=true;Pooling=true
-    
-    #User ID=postgres;Password=passwd;Host=postgresql_database;Port=9999;Database=Commander;Pooling=true;
+      - DB_CONNECTION_STRING=Server=postgresql_database;Port=9999;Database=Commander;User Id=postgres;Password=passwd;
     networks:
       - commander-api-dev
+
     restart: unless-stopped
 
-volumes:
-  database-data:
+#volumes:
+#  database-data:
+  
+  # Server=127.0.0.1;Port=5432;Database=myDataBase;User Id=myUsername;Password=myPassword;
+  
+  #      - "User ID=postgres;Password=passwd;Host=postgresql_database;Port=9999;Database=Commander;Pooling=true"
+  #      - DB_CONNECTION_STRING="User ID=postgres;Password=passwd;Host=postgresql_database;Port=9999;Database=Commander;Pooling=true"
+  #      - User ID = user;Password=pass;Server=postgres;Port=5432;Database=testdb;Integrated Security=true;Pooling=true
+  
+  #User ID=postgres;Password=passwd;Host=postgresql_database;Port=9999;Database=Commander;Pooling=true;
