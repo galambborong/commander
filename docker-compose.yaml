@@ -14,7 +14,7 @@ services:
     networks:
       - commander-api-dev
     ports:
-      - "9999:5432"
+      - "5432:5432"
     restart: unless-stopped
 #    volumes:
 #      - database-data:/var/lib/postgresql/data/
@@ -22,12 +22,11 @@ services:
   commander_api:
     depends_on:
       - postgresql_database
-    image: galambborong/commander:0.9
+    image: galambborong/commander:latest
     ports:
       - "8080:80"
     environment: 
       - Logging__Console__FormatterName=""
-      - DB_CONNECTION_STRING=Server=postgresql_database;Port=9999;Database=Commander;User Id=postgres;Password=passwd;
     networks:
       - commander-api-dev
 
